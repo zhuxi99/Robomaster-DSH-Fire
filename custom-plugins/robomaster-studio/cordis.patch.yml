@@ -1,0 +1,4 @@
+- insert:
+    - id: robomaster-studio
+      name: dsh-robomaster-studio
+      config: {}

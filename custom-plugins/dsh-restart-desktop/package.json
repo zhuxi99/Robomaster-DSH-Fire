@@ -1,0 +1,23 @@
+{
+  "name": "dsh-restart-desktop",
+  "version": "1.0.0",
+  "description": "One-click restart button for DSH Desktop in Settings",
+  "type": "module",
+  "main": "./dsh/index.js",
+  "exports": {
+    ".": "./dsh/index.js",
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": ["@deepseek-ai/dsh-client-ui-settings"],
+      "platform": "web"
+    }
+  },
+  "files": ["dsh", "client", "cordis.patch.yml", "package.json"]
+}

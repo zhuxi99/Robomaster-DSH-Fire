@@ -1,0 +1,33 @@
+# ===== 敏感数据：绝不提交 =====
+.credentials.yaml
+ext-bridge-token
+.anonymous-user-id
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+storageState*.json
+sessions/
+storages/
+attachments/
+.dsh-any-background-data/
+browser-extension/
+memories/daily/
+memories/projects/
+memories/advisor/
+memories/pending-skills/
+memories/dsh-memory-evolve/
+memories/skills-state.json
+memories/SUGGESTIONS.jsonl
+graph-memory/
+
+# ===== 依赖与构建产物 =====
+node_modules/
+pnpm-lock.yaml
+*.tgz
+
+# ===== 备份与杂项 =====
+*.bak*
+*.map
+.DS_Store
+Thumbs.db
+.npm-cache/

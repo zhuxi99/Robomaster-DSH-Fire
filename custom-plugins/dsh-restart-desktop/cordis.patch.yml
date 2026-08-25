@@ -1,0 +1,4 @@
+# dsh-restart-desktop bundle patch — inserts the plugin's host row into the profile.
+- insert:
+    - id: dsh-restart-desktop
+      name: 'dsh-restart-desktop'

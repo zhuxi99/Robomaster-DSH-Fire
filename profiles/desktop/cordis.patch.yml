@@ -1,0 +1,42 @@
+# Keep local file tools on the host filesystem. Mirage currently replaces
+# ctx.fs and ctx.shell with a virtual workspace that only mounts /tmp.
+- id: mirage
+  disabled: true
+- id: mirage-fs
+  disabled: true
+- id: mirage-shell
+  disabled: true
+- id: fs-sandbox
+  disabled: false
+- id: bash-sandbox
+  disabled: false
+- id: tool-bash
+  disabled: false
+- id: tool-fs
+  disabled: false
+- id: tool-fs-search
+  disabled: false
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+
+# Load the core tool runtime from the launcher-maintained fallback so it shares
+# the scheduler identity used by dsh-agent-loop. Loader patches cannot change
+# a row's module name, so replace the built-in entry with an equivalent row.
+- id: tools
+  disabled: true
+- insert:
+    - id: tools-host-fallback
+      name: ../node_modules/@deepseek-ai/dsh-tools/lib/index.js
+      config:
+        mode: !!js process.env.DSH_TOOLS_MODE
+
+# Use the installed Google Chrome instead of downloading Playwright Chromium.
+- id: browser
+  config:
+    channel: chrome
+
+# dsh-cad (LAU-MARS): 无 dsh.bundle 声明，按 README 手动 insert
+- insert:
+    - id: dsh-cad
+      name: 'dsh-cad'

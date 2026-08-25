@@ -1,0 +1,1288 @@
+ui-onboarding:
+  welcomeNoticeVersion: 2026-08-13.1
+agent-presets:
+  default: standard
+llm-pi-ai:
+  providers:
+    grok:
+      displayName: "1412"
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://1412520.cyou/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    q:
+      displayName: 510刀
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://www.codemonkey2025.com/v1
+      models:
+        - id: grok-4.5
+          contextWindow: 400000
+          maxTokens: <FILL-IN>
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            supportsReasoningEffort: true
+            chatTemplateKwargs: {}
+    a:
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://fxqidian.de5.net/v1
+      models:
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+      displayName: "分享奇点"
+    kan:
+      displayName: 247kan
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.247kan.com
+      models:
+        - id: gpt-5.6-sol
+          name: GPT-5.6 Sol
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: ultra
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: GPT-5.6 Terra
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: ultra
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          name: GPT-5.6 Luna
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+    futureppo:
+      displayName: futureppo
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://api.futureppo.top/v1
+      models:
+        - id: gemini-2.5-flash-lite
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+    kan2:
+      displayName: 247kan 0.04x
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.247kan.com/v1
+      models:
+        - id: gpt-5.6-sol
+          name: GPT-5.6 Sol
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: GPT-5.6 Terra
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          name: GPT-5.6 Luna
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+    lmm:
+      displayName: lmm
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.lmm.best/v1
+      models:
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.5
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+    vsllm:
+      displayName: 维云
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://vsllm.com/v1
+      models:
+        - id: "[opencode]deepseek-v4-flash"
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: "[opencode]deepseek-v4-pro"
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash-free
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: kimi-k3
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: gemini-3.7-flash-api
+    newapi:
+      displayName: columbina
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://newapi.columbina.eu.org/v1
+      models:
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-composer-2.5-fast
+          contextWindow: 400000
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+            xhigh: xhigh
+            max: max
+          compat:
+            chatTemplateKwargs: {}
+    aiwanai:
+      displayName: aiwanai
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.aiwanai.cc/v1
+      models:
+        - id: "[free]deepseek-v4-flash"
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: "[free]gemini-3.7-flash"
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    leyanshi:
+      displayName: leyanshi
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://gy.leyanshi.me/v1
+      models:
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    llmhost:
+      displayName: llmhost公益站
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://llmhost.net/v1
+      models:
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: glm-5.3
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: kimi-k3
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    tianluo:
+      displayName: 村长的付费站
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://new.tianluo.ccwu.cc/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    wtf:
+      displayName: "17 每天调用600次"
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.17.wtf/v1
+      models:
+        - id: posiden/deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    rota:
+      displayName: rota
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://ai.rota.fans/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    vyceai:
+      displayName: vyceai
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://vyceai.com/v1
+      models:
+        - id: claude-opus-5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    o10:
+      displayName: 哈基米的
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://o10.top/v1
+      models:
+        - id: gemini-3.7-flash
+          name: gemini-3.7-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    noo:
+      displayName: linuxsb包姐的
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://newapi.noo.cool
+      models:
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: glm-5.2
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    x:
+      displayName: 不降智免费grok
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://x-api.cfd/v1
+      models:
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    qidian7:
+      displayName: 奇点
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://qidian7.de5.net/v1
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    aihub:
+      displayName: aihub
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://aihub.top/v1
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    renai:
+      displayName: renai
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://renai.uno
+      models:
+        - id: deepseek-v4-flash-0731
+          name: deepseek-v4-flash-0731
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro-0813
+          name: deepseek-v4-pro-0813
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    ecvaixs:
+      displayName: linux免费的
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://sub.ecvaixs.cn
+      models:
+        - id: gpt-5.6-sol
+          name: GPT-5.6 Sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: GPT-5.6 Terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          name: GPT-5.6 Luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    sheapi:
+      displayName: sheapi
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://www.sheapi.cc/v1
+      models:
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    ai8:
+      displayName: ai8
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://ai8.my/v1
+      models:
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    aizzz:
+      displayName: aizzz
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.aizzz.xyz/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    nodexapi:
+      displayName: nodexapi
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://nodexapi.it.com/v1
+      models:
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    wahuiliyi:
+      displayName: wahuiliyi
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api2.wahuiliyi.cn
+      models:
+        - id: gpt-5.6-sol
+          name: GPT-5.6 Sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: GPT-5.6 Terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          name: GPT-5.6 Luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    fineapi:
+      displayName: 多多ai，0.1xluna
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://quiteai.autos
+      models:
+        - id: gpt-5.6-luna
+          name: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna-openai-compact
+          name: gpt-5.6-luna-openai-compact
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    allinai:
+      displayName: 每天3$体验一个月50$
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api-hk.allinai.shop/v1
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    xqapi:
+      displayName: xqapi 0.01xluna
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://xqapi.com/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    sudoflow:
+      displayName: sudoflow
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://sudoflow.top/v1
+      models:
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    bytecatcode:
+      displayName: bytecatcode
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://www.bytecatcode.org/v1
+      models:
+        - id: gpt-5.5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    renai2:
+      displayName: renai-float 0.065x
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://renai.uno
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    renai2-fast:
+      displayName: renai-float 0.065x Fast
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://renai.uno
+      serviceTier: priority
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    fastaitoken:
+      <FILL-IN>
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://www.fastaitoken.com
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          name: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    linuxdo:
+      displayName: linuxdo
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: http://47.129.182.84/v1
+      models:
+        - id: deepseek-v4-pro-0813
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash-0731
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    true-sota:
+      displayName: true-sota
+      api: openai-responses
+      baseURL: https://true-sota.com/v1
+      models:
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    teamorouter:
+      displayName: 每天免费ds额度
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://api.teamorouter.com/v1
+      models:
+        - id: deepseek-v4-flash-free
+          name: DeepSeek V4 Flash福利版
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro-free
+          name: DeepSeek V4 Pro福利版
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    niko-pro-2:
+      displayName: Niko pro
+      api: openai-responses
+      baseURL: https://us.nikoapi.xyz/v1
+      models:
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    x-api:
+      displayName: x-api
+      api: openai-responses
+      baseURL: https://x-api.cfd
+      models:
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    custom-provider:
+      displayName: 鸡哥
+      api: openai-responses
+      baseURL: https://chickener.top/v1
+      models:
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    renrenai:
+      displayName: renrenai
+      api: openai-responses
+      baseURL: https://renai.uno
+      models:
+        - id: gpt-5.5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    renai-luna:
+      displayName: renai luna
+      api: openai-responses
+      baseURL: https://renai.uno
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    s3ai:
+      displayName: S3AI
+      api: openai-responses
+      baseURL: https://ai.furry.vg/v1
+      models:
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    mnbv:
+      displayName: nexusmmo外国公益站
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.nexusmmo.store
+      models:
+        - id: gemini-3.7-flash
+          name: gemini-3.7-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek/deepseek-v4-pro-0813
+          name: deepseek/deepseek-v4-pro-0813
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek/deepseek-v4-flash-0731
+          name: deepseek/deepseek-v4-flash-0731
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    chatanywhere:
+      displayName: 每日10000点额度
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.chatanywhere.org
+      models:
+        - id: deepseek-v4-pro
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-sol
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-luna
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: gpt-5.6-terra
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    kscsnkli:
+      displayName: 津巴布韦币
+      api: openai-completions
+      baseURL: https://ai.kscsnkli.site/v1
+      models:
+        - id: acu/deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    whitedream:
+      displayName: 人人管转ds 0.1x
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://llm.whitedream.top/v1
+      models:
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-pro
+    b-ai:
+      displayName: b-ai
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://api.b.ai/v1
+      models:
+        - id: deepseek-v4-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash-vision-exp
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+    custom-provider-3:
+      displayName: 白嫖站
+      api: openai-responses
+      baseURL: https://ai.baipiao.co/v1
+      models:
+        - id: deepseek-ai/deepseek-v4-flash-0731
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.5
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: grok-4.6
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: minimaxai/minimax-m3
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: moonshotai/kimi-k3
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: stepfun-ai/step-3.7-flash
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    custom-provider-4:
+      displayName: 外国佬的公益站
+      api: openai-responses
+      baseURL: https://api.nexusmmo.store
+      models:
+        - id: gpt-5.6-sol
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+        - id: gpt-5.6-terra
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+        - id: gpt-5.6-luna
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+      apiKeyEnv: <FILL-IN>
+    sheapi-2:
+      displayName: sheapi
+      api: openai-responses
+      baseURL: https://cf.sheapi.cc/v1
+      models:
+        - id: codex-auto-review
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+        - id: gpt-5.6-sol
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+        - id: gpt-5.6-terra
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+      apiKeyEnv: <FILL-IN>
+    mcgrox:
+      displayName: mcgrox ceshi
+      apiKeyEnv: <FILL-IN>
+      api: openai-completions
+      baseURL: https://www.mcgrox.top/
+      models:
+        - id: gpt-5.6-sol
+          name: gpt-5.6-sol
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+    aizzz-2:
+      displayName: aizzz
+      api: openai-responses
+      baseURL: https://api.aizzz.xyz/v1
+      models:
+        - id: gpt-5.6-luna
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+      apiKeyEnv: <FILL-IN>
+    custom-provider-2:
+      displayName: 橘子
+      api: anthropic-messages
+      baseURL: https://beizhi.sylu.cc
+      models:
+        - id: gemini-3.7-flash
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+          contextWindow: 400000
+      apiKeyEnv: <FILL-IN>
+    lmm-2:
+      displayName: lmm国模
+      api: openai-completions
+      baseURL: https://api.lmm.best/v1
+      models:
+        - id: deepseek-v4-pro-0813
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+        - id: deepseek-v4-flash-0731
+          contextWindow: 400000
+          input: []
+          compat:
+            chatTemplateKwargs: {}
+      apiKeyEnv: <FILL-IN>
+    custom-provider-5:
+      displayName: jsper
+      api: openai-responses
+      baseURL: https://api.yjs.im/v1
+      models:
+        - id: deepseek-v4-flash-0731
+        - id: kimi-k3
+        - id: gemini-3.7-flash
+        - id: ox-alpha
+        - id: deepseek-v4-flash-preview
+      apiKeyEnv: <FILL-IN>
+    freey-luna:
+      displayName: freey-luna
+      api: openai-responses
+      baseURL: https://ai.furry.vg/v1
+      models:
+        - id: openai/gpt-5.6-luna
+        - id: deepseek-v4-flash-0731-free
+      apiKeyEnv: <FILL-IN>
+    laoda:
+      displayName: 老大
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://api.lmm.best/v1
+      models:
+        - id: lightjunction
+    ai-0-1x:
+      displayName: 星海ai 0.1x
+      api: openai-responses
+      baseURL: https://platform.ai.hixinghai.top/api/v1
+      models:
+        - id: gpt-5.6-luna
+        - id: gpt-5.6-sol
+        - id: gpt-5.6-terra
+      apiKeyEnv: <FILL-IN>
+    ai:
+      displayName: 星海ai 国模
+      api: openai-responses
+      baseURL: https://platform.ai.hixinghai.top/api/v1
+      models:
+        - id: deepseek-v4-flash
+        - id: deepseek-v4-pro
+      apiKeyEnv: <FILL-IN>
+    custom-provider-6:
+      displayName: " 星期五API"
+      api: openai-completions
+      baseURL: https://api.fri5.top/v1
+      models:
+        - id: NI【官方/按量】gpt-5.6-luna
+      apiKeyEnv: <FILL-IN>
+    lmmlmm:
+      displayName: lmm gemini 0.3x
+      api: openai-responses
+      baseURL: https://api.lmm.best/v1
+      models:
+        - id: gemini-3.7-flash
+        - id: gemini-3.7-flash-high
+      apiKeyEnv: <FILL-IN>
+    baibei:
+      displayName: 百倍佬
+      apiKeyEnv: <FILL-IN>
+      api: anthropic-messages
+      baseURL: https://sub.100xlabs.space
+      models:
+        - id: claude-opus-5
+agent-default-model:
+  provider: lmm-2
+  model: "deepseek-v4-flash-0731"
+  reasoningEffort: max
+permission:
+  defaultPreset: auto
+ui-conversation:
+  busyEnter: queue
+pet:
+  visible: false
+  size: 160
+  right: 16
+  bottom: 0
+  petId: whale-girl
+ui-theme:
+  preference: light
+llm-deepseek:
+  models: []
+dsh-better-sidebar:
+  tabsEnabled:
+    browser: true

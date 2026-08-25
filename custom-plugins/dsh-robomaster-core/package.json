@@ -1,0 +1,31 @@
+{
+  "name": "dsh-robomaster-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web-free RoboMaster Studio core for DeepSeek Harness",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/smoke.mjs"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-system-prompt": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
+  },
+  "license": "MIT"
+}

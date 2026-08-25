@@ -1,0 +1,5 @@
+# Mount the Web-free RoboMaster core into a profile that already provides
+# dsh-prompt-manager. The legacy HTML studio keeps its own Web-only bundle.
+- insert:
+    - id: robomaster-core
+      name: dsh-robomaster-core
