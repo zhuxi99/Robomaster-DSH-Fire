@@ -31,7 +31,7 @@
 | :--- | :--- |
 | **适配平台** | Windows 10 / 11 (x64) |
 | **核心用途** | 机械图纸审查、三维模型查看、参数化辅助建模、队内提示词与预设同步 |
-| **安装方式** | PowerShell 一键脚本自动化安装 |
+| **安装方式** | 双击 `install.bat` 一键安装（无需敲命令） |
 | **数据安全** | 敏感配置与历史数据已全量脱敏，无密钥泄露风险 |
 
 ---
@@ -40,7 +40,7 @@
 
 - 🛠️ **三大 CAD 核心套件**：预置已构建的 DXF 图纸审查、3D 模型查看器以及 OCCT 参数化建模工作台，Windows 免编译。
 - 📦 **队内自研插件全家桶**：集成 RoboMaster 工作台、核心机器人工具、模型批量配置及桌面快速重启插件。
-- ⚡ **一键自动化安装**：内置 `install.ps1` 脚本，自动处理相对路径链接与依赖补丁注入。
+- ⚡ **双击即可安装**：内置 `install.bat`，机械组队友**双击文件**就能自动完成全部安装，无需打开终端敲任何命令。
 - 🔒 **敏感数据零泄漏**：聊天记录、API Keys、私有项目记忆与本地数据库均已严格隔离并被 `.gitignore` 排除。
 - 🎯 **开箱即用规范**：集成机械准则提示词节点与专用 Agent 预设，确保全队输出标准一致。
 
@@ -65,7 +65,8 @@ zhuxi99/robomaster-DSH-/
 ├── prompts/                   # 提示词资产（active.yml + 机械设计准则）
 ├── presets/liangshen/         # Agent 角色与工作流预设
 ├── memories/                  # 脱敏用户档案 USER.md + 全局记忆 MEMORY.md + memory.md
-├── install.ps1                # Windows 一键自动化安装脚本
+├── install.bat                # 🖱️ 双击一键安装入口（推荐，无需敲命令）
+├── install.ps1                # Windows 自动化安装脚本主体
 ├── sanitize-settings.mjs      # settings.yaml 脱敏生成脚本（生成 settings.yaml.template）
 └── .gitignore                 # 敏感数据与本地运行时文件排除清单
 ```
@@ -91,16 +92,21 @@ git clone https://github.com/zhuxi99/robomaster-DSH-.git
 cd robomaster-DSH-
 ```
 
-### 3. 运行一键安装脚本
+### 3. 运行一键安装
 
-你可以通过以下两种方式之一运行安装脚本：
+> 💡 **最简单的方式：直接双击 `install.bat`**，它会自动完成全部安装步骤，全程不需要打开终端、不需要敲任何命令。安装完成后窗口会自动提示结果。
 
-- **方式一（推荐）**：在文件资源管理器中找到 `install.ps1`，**右键 → 使用 PowerShell 运行**。
-- **方式二（命令行）**：在仓库根目录打开 PowerShell 并运行：
+| 方式 | 操作 | 适合人群 |
+| :--- | :--- | :--- |
+| **🖱️ 双击（推荐）** | 在文件资源管理器中**双击 `install.bat`** | 所有人，最简单 |
+| **右键运行** | 右键 `install.ps1` → **使用 PowerShell 运行** | 习惯右键菜单 |
+| **命令行** | 在仓库根目录打开 PowerShell 运行下方命令 | 熟悉终端的用户 |
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
+
+> ⚠️ 如果之前用旧版 `install.ps1` 安装报过错，先执行 `git pull` 拉到最新代码，再双击 `install.bat` 重试。
 
 ### 4. 关键：重启客户端
 
@@ -132,13 +138,15 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 ## ❓ 常见问题 (FAQ)
 
 <details>
-<summary><b>Q1: 运行 install.ps1 报错或提示脚本执行权限受限怎么办？</b></summary>
+<summary><b>Q1: 安装时报错 / 提示脚本执行权限受限怎么办？</b></summary>
 
-Windows 默认可能限制未签名脚本运行。请以管理员身份打开 PowerShell 执行以下命令允许脚本运行，然后重试：
+**首选：直接双击 `install.bat`**——它已内置 `-ExecutionPolicy Bypass` 参数，不受系统脚本执行策略限制，大多数权限问题双击即可解决。
+
+如果仍然报错，可以手动放开执行策略后重试：
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
-或者直接使用绕过策略运行：
+或者使用绕过策略运行：
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
@@ -153,11 +161,11 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 <details>
 <summary><b>Q3: 后续仓库更新了新插件或提示词，队员如何升级同步？</b></summary>
 
-在仓库目录下拉取最新代码并重新运行安装脚本即可：
+在仓库目录下拉取最新代码后，**重新双击 `install.bat`** 即可：
 ```powershell
 git pull origin main
-powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
+然后双击 `install.bat`（或运行 `powershell -ExecutionPolicy Bypass -File .\install.ps1`）。
 安装完成后记得**完整重启 DSH Desktop**。
 </details>
 
