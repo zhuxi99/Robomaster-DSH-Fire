@@ -1,5 +1,5 @@
 # ============================================================
-# RoboMaster DSH Desktop 一键安装脚本（Windows PowerShell）
+# ⚡ 太原工业学院 · 火线战队 DSH Desktop 一键安装脚本（Windows PowerShell）
 # 用法：双击 install.bat 即可，或手动执行：
 #   powershell -NoProfile -ExecutionPolicy Bypass -File install.ps1
 # ============================================================
@@ -102,7 +102,7 @@ function Copy-DirectoryContents {
 }
 
 Write-Host "==============================================" -ForegroundColor Cyan
-Write-Host " RoboMaster DSH Desktop 安装包" -ForegroundColor Cyan
+Write-Host " ⚡ 太原工业学院 · 火线战队 DSH Desktop 安装包" -ForegroundColor Cyan
 Write-Host " 目标: $DshRoot" -ForegroundColor Cyan
 Write-Host "==============================================" -ForegroundColor Cyan
 

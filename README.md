@@ -1,7 +1,15 @@
-# 🤖 RoboMaster DSH Desktop 整合包
+```text
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+🔥  太原工业学院 · 火线战队  TIIT FIRELINE ROBOMASTER TEAM  🔥
+🔥  RoboMaster 机甲大师 · 机械组 DSH Desktop 一键整合包       🔥
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+```
 
-> 专为 RoboMaster 战队机械组打造的 **DeepSeek Harness Desktop (Windows) 一键安装配置套件**，开箱即用，与负责人标准开发环境完全一致。**全部插件离线打包，零 GitHub 依赖**——即使原插件仓库已下架，安装依旧稳定可用。
+# 🔥 太原工业学院 · 火线战队 DSH Desktop 整合包
 
+> **⚡ 火线战队专属** —— 由**太原工业学院火线战队**（RoboMaster）研发组打造，专为战队机械组定制的 **DeepSeek Harness Desktop (Windows) 一键安装配置套件**，开箱即用，与负责人标准开发环境完全一致。**全部插件离线打包，零 GitHub 依赖**——即使原插件仓库已下架，安装依旧稳定可用。
+
+![Team](https://img.shields.io/badge/Team-太原工业学院·火线战队-FF6B00?logo=fire&logoColor=white)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](#-快速开始)
 [![Node Version](https://img.shields.io/badge/Node.js-≥22-339933?logo=nodedotjs&logoColor=white)](#-快速开始)
 [![pnpm Version](https://img.shields.io/badge/pnpm-≥10-F69220?logo=pnpm&logoColor=white)](#-快速开始)
@@ -27,14 +35,15 @@
 
 ## 📖 项目简介
 
-本仓库是针对 RoboMaster 战队定制的 DSH Desktop 环境配置整合包。针对 Windows 系统进行了完整的依赖解耦与路径相对化改造，内置 DXF 图纸确定性审查、参数化建模与机械工作流工具链，帮助机械组队员省去复杂的环境配置流程，一键同步队内核心工作流。
+本仓库是 **太原工业学院火线战队（RoboMaster）** 研发组为战队定制的 DSH Desktop 环境配置整合包。针对 Windows 系统进行了完整的依赖解耦与路径相对化改造，内置 DXF 图纸确定性审查、参数化建模与机械工作流工具链，帮助机械组队员省去复杂的环境配置流程，一键同步火线战队核心工作流。
 
 | 核心维度 | 说明 |
 | :--- | :--- |
+| **所属战队** | 🔥 太原工业学院 · 火线战队（RoboMaster） |
 | **适配平台** | Windows 10 / 11 (x64) |
 | **核心用途** | 机械图纸审查、参数化辅助建模、队内提示词与预设同步、模型批量配置 |
 | **安装方式** | 双击 `install.bat` 一键安装（无需敲命令） |
-| **插件来源** | 自研插件 + GitHub 社区插件（**已离线打包**）+ npm 官方依赖 |
+| **插件来源** | 火线战队自研插件 + GitHub 社区插件（**已离线打包**）+ npm 官方依赖 |
 | **数据安全** | 敏感配置与历史数据已全量脱敏，无密钥泄露风险 |
 
 ---
@@ -42,12 +51,12 @@
 ## ✨ 特性一览
 
 - 🛠️ **两大 CAD 核心套件**：预置已构建的 DXF 图纸审查和 OCCT 参数化建模工作台，Windows 免编译。
-- 📦 **队内自研插件全家桶**：集成 RoboMaster 工作台、核心机器人工具、模型批量配置及桌面快速重启插件。
+- 📦 **火线战队自研插件全家桶**：集成 RoboMaster 工作台、核心机器人工具、模型批量配置及桌面快速重启插件。
 - 📀 **11 个 GitHub 插件全离线打包**：所有 `github:` 来源的社区插件均已打成 `.tgz` 随仓库分发，Windows 安装时**完全不需要访问 GitHub**——即使原仓库下架（如 `dsh-web-default-session`，其原仓库 `wjy9902/dsh-web-default-session` 已确认下架），安装也不受影响。仅从 npm 官方 registry 拉取标准依赖。
 - 🧬 **graph-memory 跨平台原生依赖就绪**：内置 sqlite 原生模块的 **win32-x64 预编译**，Windows 免编译直接使用。
-- ⚡ **双击即可安装**：内置 `install.bat`，机械组队友**双击文件**就能自动完成全部安装，无需打开终端敲任何命令。
+- ⚡ **双击即可安装**：内置 `install.bat`，火线战队机械组队友**双击文件**就能自动完成全部安装，无需打开终端敲任何命令。
 - 🔒 **敏感数据零泄漏**：聊天记录、API Keys、私有项目记忆与本地数据库均已严格隔离并被 `.gitignore` 排除。
-- 🎯 **开箱即用规范**：集成机械准则提示词节点与专用 Agent 预设，确保全队输出标准一致。
+- 🎯 **开箱即用规范**：集成火线战队机械准则提示词节点与专用 Agent 预设，确保全队输出标准一致。
 
 ---
 
@@ -55,7 +64,7 @@
 
 整合包共安装 **17 个自研/第三方插件**（4 自研 + 2 CAD + 11 个社区插件离线打包），另有若干 npm 官方依赖随 profile 自动安装。
 
-### 队内自研插件（`custom-plugins/` → `.dsh/plugins/`）
+### 🔥 火线战队自研插件（`custom-plugins/` → `.dsh/plugins/`）
 
 | 插件 | 版本 | 说明 |
 | :--- | :--- | :--- |
@@ -96,7 +105,7 @@
 ## 📂 目录结构
 
 ```text
-zhuxi99/robomaster-DSH-/
+zhuxi99/Robomaster-DSH-Fire/
 ├── profiles/desktop/          # desktop profile 配置（已针对 Windows 环境适配）
 │   ├── package.json           # 插件清单（本地 .tgz / 相对路径 link，无平台专属依赖）
 │   ├── pnpm-workspace.yaml    # pnpm 工作区配置（关闭 peer 自动安装、批准原生构建脚本）
@@ -146,8 +155,8 @@ zhuxi99/robomaster-DSH-/
 打开终端或 PowerShell 执行：
 
 ```bash
-git clone https://github.com/zhuxi99/robomaster-DSH-.git
-cd robomaster-DSH-
+git clone https://github.com/zhuxi99/Robomaster-DSH-Fire.git
+cd Robomaster-DSH-Fire
 ```
 
 ### 3. 运行一键安装
@@ -276,4 +285,4 @@ git pull origin main
 - 本整合包中的 CAD 插件（`dsh-cad-review`, `dsh-cad`）及 GitHub 社区插件（`dsh-at-file`, `dsh-auto-collapse`, `dsh-live-reload`, `dsh-memory-evolve`, `dsh-model-search`, `dsh-prompt-manager`, `dsh-shortcuts`, `dsh-web-default-session`, `dsh-webui-perf`, `graph-memory`, `oss-prompt-optimizer` 共 11 个）均归原作者所有，各自遵循独立的开源许可证。
 - 社区插件已通过 `pnpm pack` 打包为 `.tgz` 离线分发，**即使原 GitHub 仓库下架，安装不受影响**。其中 `dsh-web-default-session` 原仓库 `wjy9902/dsh-web-default-session` 已确认下架，仓库内 tgz 为其唯一可用来源。
 - `graph-memory` 的 sqlite 原生依赖已从本地 vendor 包切换为 npm registry 版本（`@photostructure/sqlite@1.2.1`，与 vendor 内容一致且含 win32-x64 预编译），保证 Windows 端跨平台可用。
-- 队内自研插件由 RoboMaster 战队研发组维护。如有 Bug 反馈或功能需求，请在队内群或提交 Issue 联系。
+- 队内自研插件由 **太原工业学院火线战队（RoboMaster）研发组** 维护。如有 Bug 反馈或功能需求，请在队内群或提交 Issue 联系。

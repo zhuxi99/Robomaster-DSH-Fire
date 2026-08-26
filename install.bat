@@ -1,9 +1,10 @@
 @echo off
 chcp 65001 >nul
-title RoboMaster DSH 安装
+title ⚡ 太原工业学院 · 火线战队 DSH 安装
 echo ============================================
-echo   RoboMaster DSH Desktop 一键安装
-echo   正在启动安装脚本...
+echo   ⚡ 太原工业学院 · 火线战队
+echo     RoboMaster DSH Desktop 一键安装
+echo     正在启动安装脚本...
 echo ============================================
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0install.ps1"
