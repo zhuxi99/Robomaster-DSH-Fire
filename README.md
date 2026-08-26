@@ -1,21 +1,20 @@
-```text
-🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-🔥  太原工业学院 · 火线战队  TIIT FIRELINE ROBOMASTER TEAM  🔥
-🔥  RoboMaster 机甲大师 · 机械组 DSH Desktop 一键整合包       🔥
-🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-```
+<p align="center">
+  <img src="https://img.shields.io/badge/太原工业学院·火线战队-TIIT_Fireline-FF6B00?style=for-the-badge&logo=fire&logoColor=white" alt="火线战队" />
+</p>
 
 # 🔥 太原工业学院 · 火线战队 DSH Desktop 整合包
 
 > **⚡ 火线战队专属** —— 由**太原工业学院火线战队**（RoboMaster）研发组打造，专为战队机械组定制的 **DeepSeek Harness Desktop (Windows) 一键安装配置套件**，开箱即用，与负责人标准开发环境完全一致。**全部插件离线打包，零 GitHub 依赖**——即使原插件仓库已下架，安装依旧稳定可用。
 
-![Team](https://img.shields.io/badge/Team-太原工业学院·火线战队-FF6B00?logo=fire&logoColor=white)
+<p align="center">
+[![Team](https://img.shields.io/badge/Team-太原工业学院·火线战队-FF6B00?logo=fire&logoColor=white)](#-项目简介)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](#-快速开始)
 [![Node Version](https://img.shields.io/badge/Node.js-≥22-339933?logo=nodedotjs&logoColor=white)](#-快速开始)
 [![pnpm Version](https://img.shields.io/badge/pnpm-≥10-F69220?logo=pnpm&logoColor=white)](#-快速开始)
 [![DSH Desktop](https://img.shields.io/badge/DSH-Desktop-8A2BE2)](#-特性一览)
 [![Offline](https://img.shields.io/badge/Plugins-Offline_Packed-green)](#-特性一览)
 [![Security](https://img.shields.io/badge/Security-No_Secrets-brightgreen)](#-数据安全声明)
+</p>
 
 ---
 
