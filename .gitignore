@@ -24,6 +24,7 @@ graph-memory/
 node_modules/
 pnpm-lock.yaml
 *.tgz
+!third-party/*.tgz
 
 # ===== 备份与杂项 =====
 *.bak*

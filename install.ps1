@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # RoboMaster DSH Desktop 一键安装脚本（Windows PowerShell）
 # 用法：双击 install.bat 即可，或手动执行：
 #   powershell -NoProfile -ExecutionPolicy Bypass -File install.ps1
@@ -174,6 +174,7 @@ if (Test-Path $pkgDest) {
 }
 Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\package.json") $pkgDest
 Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\cordis.patch.yml") (Join-Path $ProfDest "cordis.patch.yml")
+Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\pnpm-workspace.yaml") (Join-Path $ProfDest "pnpm-workspace.yaml")
 Write-Host "    OK"
 
 # ---------- 5. 提示词与预设 ----------

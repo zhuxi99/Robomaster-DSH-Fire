@@ -40,6 +40,7 @@
 
 - 🛠️ **两大 CAD 核心套件**：预置已构建的 DXF 图纸审查和 OCCT 参数化建模工作台，Windows 免编译。
 - 📦 **队内自研插件全家桶**：集成 RoboMaster 工作台、核心机器人工具、模型批量配置及桌面快速重启插件。
+- 📀 **全离线插件打包**：19 个插件全部以 `.tgz` 或源码目录形式随仓库打包，**零 GitHub 依赖**——即使原仓库下架（如 `dsh-web-default-session`），安装不受影响。仅从 npm 官方 registry 下载标准依赖。
 - ⚡ **双击即可安装**：内置 `install.bat`，机械组队友**双击文件**就能自动完成全部安装，无需打开终端敲任何命令。
 - 🔒 **敏感数据零泄漏**：聊天记录、API Keys、私有项目记忆与本地数据库均已严格隔离并被 `.gitignore` 排除。
 - 🎯 **开箱即用规范**：集成机械准则提示词节点与专用 Agent 预设，确保全队输出标准一致。
@@ -51,16 +52,28 @@
 ```text
 zhuxi99/robomaster-DSH-/
 ├── profiles/desktop/          # desktop profile 配置（已针对 Windows 环境适配）
-│   ├── package.json           # 插件清单（相对路径 link，无平台专属依赖）
+│   ├── package.json           # 插件清单（本地 .tgz / 相对路径 link，无平台专属依赖）
+│   ├── pnpm-workspace.yaml    # pnpm 工作区配置（关闭 peer 自动安装、允许原生构建脚本）
 │   └── cordis.patch.yml       # 加载器补丁（含 dsh-cad 手动 insert 配置）
 ├── custom-plugins/            # 队内自研插件源码（共 4 个）
 │   ├── robomaster-studio/     # 工作台插件
 │   ├── dsh-robomaster-core/   # 机器人核心工具
 │   ├── model-tuner/           # 模型批量配置工具
 │   └── dsh-restart-desktop/   # 桌面重启辅助插件
-├── third-party/               # 第三方 CAD 插件（已预编译，Windows 免编译直接使用）
+├── third-party/               # 第三方插件（已打包，Windows 免编译直接使用）
 │   ├── dsh-cad-review/        # v0.2.0 DXF 图纸确定性审查插件
-│   └── dsh-cad/               # v0.1.0 OCCT 参数化建模工作台（含 lib/ 构建产物）
+│   ├── dsh-cad/               # v0.1.0 OCCT 参数化建模工作台（含 lib/ 构建产物）
+│   ├── dsh-at-file-0.6.0.tgz  # 以下均为 GitHub 插件离线打包（含已下架的）
+│   ├── dsh-auto-collapse-0.1.3.tgz
+│   ├── dsh-live-reload-0.2.0.tgz
+│   ├── dsh-memory-evolve-0.1.0.tgz
+│   ├── dsh-model-search-0.1.0.tgz
+│   ├── dsh-prompt-manager-0.1.0.tgz
+│   ├── dsh-shortcuts-1.1.0.tgz
+│   ├── dsh-web-default-session-1.0.0.tgz  # ⚠️ 原仓库已下架，此 tgz 是唯一可用来源
+│   ├── dsh-webui-perf-0.1.0.tgz
+│   ├── graph-memory-1.6.0-beta.1.tgz      # 含 win32-x64 sqlite 预编译
+│   └── oss-prompt-optimizer-1.3.6.tgz
 ├── prompts/                   # 提示词资产（active.yml + 机械设计准则）
 ├── presets/liangshen/         # Agent 角色与工作流预设
 ├── memories/                  # 脱敏用户档案 USER.md + 全局记忆 MEMORY.md + memory.md
@@ -179,5 +192,5 @@ git pull origin main
 
 ## 📝 备注与上游来源
 
-- 本整合包中包含的第三方插件（`dsh-cad-review`, `dsh-cad`）均归原作者所有，各自遵循独立的开源许可证，具体可见各插件目录内的说明文档。
+- 本整合包中的 CAD 插件（`dsh-cad-review`, `dsh-cad`）及 GitHub 社区插件（`dsh-at-file`, `dsh-auto-collapse`, `dsh-live-reload` 等共 11 个）均归原作者所有，各自遵循独立的开源许可证。社区插件已通过 `pnpm pack` 打包为 `.tgz` 离线分发，**即使原 GitHub 仓库下架，安装不受影响**。
 - 队内自研插件由 RoboMaster 战队研发组维护。如有 Bug 反馈或功能需求，请在队内群或提交 Issue 联系。
