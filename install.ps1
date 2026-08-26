@@ -175,16 +175,27 @@ foreach ($f in $memFiles) {
 }
 
 # ---------- 8. settings.yaml ----------
-Write-Host "[8/9] 检查 settings.yaml 配置文件..." -ForegroundColor Yellow
+Write-Host "[8/9] 检查并校准 settings.yaml 配置文件..." -ForegroundColor Yellow
 $settingsDest = Join-Path $DshRoot "settings.yaml"
+$tmpl = Join-Path $RepoRoot "settings.yaml.template"
+
+# 自动自愈：如果本地已有的 settings.yaml 包含导致 YAML 语法崩溃的孤立 <FILL-IN>，自动替换为最新修复版模板
+$needsFix = $false
 if (Test-Path $settingsDest) {
-    Write-Host "    -- settings.yaml 已存在，保留"
-} else {
-    $tmpl = Join-Path $RepoRoot "settings.yaml.template"
+    $existingContent = Get-Content -LiteralPath $settingsDest -Raw -Encoding UTF8
+    if ($existingContent -match "fastaitoken:\s*\r?\n\s*<FILL-IN>") {
+        $needsFix = $true
+        Write-Host "    [自动修复] 检测到旧版损坏的 settings.yaml，正在应用修复补丁..." -ForegroundColor Yellow
+    }
+}
+
+if (-not (Test-Path $settingsDest) -or $needsFix) {
     if (Test-Path $tmpl) {
         Copy-Item -Force $tmpl $settingsDest
-        Write-Host "    [注意] 已生成模板 settings.yaml" -ForegroundColor Yellow
+        Write-Host "    OK settings.yaml 已注入并校准完毕" -ForegroundColor Green
     }
+} else {
+    Write-Host "    -- settings.yaml 已存在且语法健康，保留本机配置" -ForegroundColor Green
 }
 
 # ---------- 9. pnpm install ----------
