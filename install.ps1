@@ -11,13 +11,8 @@ $ProfDest = Join-Path $DshRoot "profiles\desktop"
 $PlugDest = Join-Path $DshRoot "plugins"
 $PackDest = Join-Path $DshRoot "pack\third-party"
 
-# DSH Desktop 官方安装包（GitHub 直链，固定 v2.0.0，安全优先不追新）
-$DesktopVersion = "2.0.0"
-$DesktopUrl = "https://github.com/anywhere-labs/dsh-desktop/releases/download/v$DesktopVersion/DSH-Desktop-$DesktopVersion-x64-Setup.exe"
-$DesktopInstaller = Join-Path $RepoRoot "DSH-Desktop-$DesktopVersion-x64-Setup.exe"
-
 function Get-InstalledDesktopVersion {
-    # 从注册表卸载项查询已安装的 DSH Desktop 版本
+    # 从注册表卸载项查询已安装的 DSH Desktop 版本（仅做信息提示，不作强依赖）
     $paths = @(
         "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*",
         "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*",
@@ -32,49 +27,6 @@ function Get-InstalledDesktopVersion {
         }
     }
     return $null
-}
-
-function Install-DesktopIfMissing {
-    Write-Host "[1/9] 检查 DSH Desktop 本体..." -ForegroundColor Yellow
-    $cur = Get-InstalledDesktopVersion
-    if ($cur) {
-        Write-Host "    OK 已安装 DSH Desktop v$cur（不更新，保持现状）" -ForegroundColor Green
-        return
-    }
-
-    Write-Host "    未检测到 DSH Desktop，准备安装 v$DesktopVersion ..." -ForegroundColor Yellow
-    if (-not (Test-Path -LiteralPath $DesktopInstaller)) {
-        Write-Host "    正在从 GitHub 下载安装包（约 141MB，请耐心等待）..." -ForegroundColor Yellow
-        try {
-            $ProgressPreference = "SilentlyContinue"
-            Invoke-WebRequest -Uri $DesktopUrl -OutFile $DesktopInstaller -UseBasicParsing
-        } catch {
-            Write-Host "    [错误] 下载失败：$_" -ForegroundColor Red
-            Write-Host "    请手动下载后重试：$DesktopUrl" -ForegroundColor Yellow
-            throw "DSH Desktop 安装包下载失败"
-        }
-        Write-Host "    下载完成：$DesktopInstaller" -ForegroundColor Green
-    } else {
-        Write-Host "    使用已下载的安装包：$DesktopInstaller" -ForegroundColor Green
-    }
-
-    Write-Host "    正在静默安装（NSIS /S），请稍候..." -ForegroundColor Yellow
-    try {
-        $proc = Start-Process -FilePath $DesktopInstaller -ArgumentList "/S" -Wait -PassThru
-        if ($proc.ExitCode -ne 0) {
-            throw "安装程序退出码 $($proc.ExitCode)"
-        }
-    } catch {
-        Write-Host "    [错误] 安装失败：$_" -ForegroundColor Red
-        throw "DSH Desktop 安装失败"
-    }
-
-    $cur2 = Get-InstalledDesktopVersion
-    if ($cur2) {
-        Write-Host "    OK DSH Desktop v$cur2 安装完成" -ForegroundColor Green
-    } else {
-        Write-Host "    [警告] 未能在注册表确认版本，可能安装到其他位置，请手动启动确认" -ForegroundColor Yellow
-    }
 }
 
 function Copy-DirectoryContents {
@@ -102,20 +54,21 @@ function Copy-DirectoryContents {
 }
 
 Write-Host "==============================================" -ForegroundColor Cyan
-Write-Host " ⚡ 太原工业学院 · 火线战队 DSH Desktop 安装包" -ForegroundColor Cyan
-Write-Host " 目标: $DshRoot" -ForegroundColor Cyan
+Write-Host " ⚡ 太原工业学院 · 火线战队 DSH 整合包注入" -ForegroundColor Cyan
+Write-Host " 目标目录: $DshRoot" -ForegroundColor Cyan
+Write-Host " 模式: 全离线插件注入（零网络下载）" -ForegroundColor Cyan
 Write-Host "==============================================" -ForegroundColor Cyan
 
-# ---------- 0. DSH Desktop 本体 ----------
-try {
-    Install-DesktopIfMissing
-} catch {
-    Write-Host " [错误] DSH Desktop 安装步骤失败，终止安装" -ForegroundColor Red
-    exit 1
+# ---------- 0. 客户端状态提示（纯提示，不下载、不中断） ----------
+$deskVer = Get-InstalledDesktopVersion
+if ($deskVer) {
+    Write-Host "    [检测] 已安装 DSH Desktop v$deskVer" -ForegroundColor Green
+} else {
+    Write-Host "    [提示] 未在注册表检测到 DSH Desktop 客户端（不影响配置注入）" -ForegroundColor DarkGray
 }
 
-# ---------- 1. 检查前置 ----------
-Write-Host "[2/9] 检查环境..." -ForegroundColor Yellow
+# ---------- 1. 检查环境 ----------
+Write-Host "[1/8] 检查 Node.js / pnpm 环境..." -ForegroundColor Yellow
 $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
 if (-not $nodeCommand) {
     Write-Host " [错误] 未找到 Node.js，请先安装 Node >= 22" -ForegroundColor Red
@@ -144,7 +97,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "    OK Node $nodeVer / pnpm $pnpmVer" -ForegroundColor Green
 
 # ---------- 2. 自研插件 ----------
-Write-Host "[3/9] 复制自研插件 -> .dsh\plugins\" -ForegroundColor Yellow
+Write-Host "[2/8] 复制火线战队自研插件 -> .dsh\plugins\" -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path $PlugDest | Out-Null
 $pluginList = @("robomaster-studio", "dsh-robomaster-core", "model-tuner", "dsh-restart-desktop")
 foreach ($p in $pluginList) {
@@ -157,14 +110,14 @@ foreach ($p in $pluginList) {
     }
 }
 
-# ---------- 3. 第三方插件（CAD + 离线打包 tgz） ----------
-Write-Host "[4/9] 复制第三方插件（CAD 2 个 + 离线打包 11 个）-> .dsh\pack\third-party\" -ForegroundColor Yellow
+# ---------- 3. 第三方插件（CAD 源码 + 离线打包 tgz） ----------
+Write-Host "[3/8] 复制第三方离线插件 -> .dsh\pack\third-party\" -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path $PackDest | Out-Null
 Copy-DirectoryContents -Source (Join-Path $RepoRoot "third-party") -Destination $PackDest
-Write-Host "    OK dsh-cad / dsh-cad-review + 11 个离线 tgz 插件"
+Write-Host "    OK CAD 套件 (2) + 离线社区插件 (11)" -ForegroundColor Green
 
 # ---------- 4. desktop profile 配置 ----------
-Write-Host "[5/9] 复制 desktop profile 配置" -ForegroundColor Yellow
+Write-Host "[4/8] 复制 desktop profile 配置 -> .dsh\profiles\desktop\" -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path $ProfDest | Out-Null
 $pkgDest = Join-Path $ProfDest "package.json"
 if (Test-Path $pkgDest) {
@@ -175,20 +128,20 @@ if (Test-Path $pkgDest) {
 Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\package.json") $pkgDest
 Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\cordis.patch.yml") (Join-Path $ProfDest "cordis.patch.yml")
 Copy-Item -Force (Join-Path $RepoRoot "profiles\desktop\pnpm-workspace.yaml") (Join-Path $ProfDest "pnpm-workspace.yaml")
-Write-Host "    OK"
+Write-Host "    OK package.json + cordis.patch.yml + pnpm-workspace.yaml" -ForegroundColor Green
 
 # ---------- 5. 提示词与预设 ----------
-Write-Host "[6/9] 复制提示词与预设" -ForegroundColor Yellow
+Write-Host "[5/8] 复制火线战队提示词与预设 -> .dsh\prompts\ & presets\" -ForegroundColor Yellow
 $promptDest = Join-Path $DshRoot "prompts"
 New-Item -ItemType Directory -Force -Path $promptDest | Out-Null
 Copy-DirectoryContents -Source (Join-Path $RepoRoot "prompts") -Destination $promptDest
 $presetDest = Join-Path $DshRoot ".agent-presets\liangshen"
 New-Item -ItemType Directory -Force -Path $presetDest | Out-Null
 Copy-DirectoryContents -Source (Join-Path $RepoRoot "presets\liangshen") -Destination $presetDest
-Write-Host "    OK prompts + presets"
+Write-Host "    OK prompts + presets" -ForegroundColor Green
 
 # ---------- 6. 记忆 ----------
-Write-Host "[7/9] 复制记忆（不覆盖已有）" -ForegroundColor Yellow
+Write-Host "[6/8] 复制脱敏记忆 -> .dsh\memories\（不覆盖已有）" -ForegroundColor Yellow
 $memDest = Join-Path $DshRoot "memories"
 New-Item -ItemType Directory -Force -Path $memDest | Out-Null
 $memFiles = @("USER.md", "MEMORY.md", "memory.md")
@@ -196,7 +149,7 @@ foreach ($f in $memFiles) {
     $t = Join-Path $memDest $f
     $s = Join-Path $RepoRoot "memories\$f"
     if (Test-Path $t) {
-        Write-Host "    -- $f 已存在，跳过（保留本机现有记忆）"
+        Write-Host "    -- $f 已存在，保留本机记忆"
     } elseif (Test-Path $s) {
         Copy-Item -Force $s $t
         Write-Host "    OK $f"
@@ -206,7 +159,7 @@ foreach ($f in $memFiles) {
 }
 
 # ---------- 7. settings.yaml ----------
-Write-Host "[8/9] settings.yaml" -ForegroundColor Yellow
+Write-Host "[7/8] 检查 settings.yaml 配置文件..." -ForegroundColor Yellow
 $settingsDest = Join-Path $DshRoot "settings.yaml"
 if (Test-Path $settingsDest) {
     Write-Host "    -- settings.yaml 已存在，保留"
@@ -214,18 +167,18 @@ if (Test-Path $settingsDest) {
     $tmpl = Join-Path $RepoRoot "settings.yaml.template"
     if (Test-Path $tmpl) {
         Copy-Item -Force $tmpl $settingsDest
-        Write-Host "    [注意] 已复制模板，请编辑 settings.yaml 填入 API Key，否则 AI 无法工作" -ForegroundColor Yellow
+        Write-Host "    [注意] 已生成模板 settings.yaml，请填入 API Key 即可使用" -ForegroundColor Yellow
     }
 }
 
 # ---------- 8. pnpm install ----------
-Write-Host "[9/9] 安装依赖（pnpm install）..." -ForegroundColor Yellow
+Write-Host "[8/8] 安装本地离线依赖（pnpm install）..." -ForegroundColor Yellow
 Push-Location $ProfDest
 $installOk = $true
 try {
     pnpm install
     if ($LASTEXITCODE -ne 0) { throw "pnpm install 失败" }
-    Write-Host "    OK 依赖安装完成" -ForegroundColor Green
+    Write-Host "    OK 全部 17 个插件依赖就绪" -ForegroundColor Green
 } catch {
     Write-Host "    [错误] $_" -ForegroundColor Red
     $installOk = $false
@@ -237,14 +190,14 @@ try {
 Write-Host ""
 Write-Host "==============================================" -ForegroundColor Cyan
 if ($installOk) {
-    Write-Host " 安装完成！" -ForegroundColor Green
+    Write-Host " ⚡ 火线战队 DSH 整合包安装完成！" -ForegroundColor Green
 } else {
-    Write-Host " 安装部分完成（有错误，请检查上方信息）" -ForegroundColor Yellow
+    Write-Host " 安装部分完成（请检查上方红字报错）" -ForegroundColor Yellow
 }
-Write-Host " 下一步：" -ForegroundColor Cyan
-Write-Host "  1. 完整重启 DSH Desktop（不是刷新页面）" -ForegroundColor White
-Write-Host "  2. 若浏览器工具报缺内核：调用 browser_install" -ForegroundColor White
-Write-Host "  3. 验证插件：设置 - 插件，应能看到 CAD 与全部离线插件" -ForegroundColor White
+Write-Host " 使用说明：" -ForegroundColor Cyan
+Write-Host "  1. 启动你的 DSH（桌面版请完整重启客户端；命令行/Web 模式直接启动）" -ForegroundColor White
+Write-Host "  2. 验证插件：设置 → 插件，应能看到 17 个插件全部加载无报错" -ForegroundColor White
+Write-Host "  3. 若浏览器工具报缺内核：在会话中让 AI 调用 browser_install" -ForegroundColor White
 Write-Host "==============================================" -ForegroundColor Cyan
 
 if (-not $installOk) {
