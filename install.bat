@@ -1,19 +1,17 @@
 @echo off
-chcp 65001 >nul
-title ⚡ 太原工业学院 · 火线战队 DSH 安装
+title RoboMaster DSH Desktop Installer
 echo ============================================
-echo   ⚡ 太原工业学院 · 火线战队
-echo     RoboMaster DSH Desktop 一键安装
-echo     正在启动安装脚本...
+echo   RoboMaster DSH Desktop
+echo     Starting installer...
 echo ============================================
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0install.ps1"
 echo.
 if %errorlevel% neq 0 (
-    echo [错误] 安装脚本执行失败，退出码 %errorlevel%
-    echo 请检查屏幕上的红色错误信息
+    echo [ERROR] Installer failed with exit code %errorlevel%
+    echo Check the PowerShell error messages above.
 ) else (
-    echo [完成] 安装成功，请重启 DSH Desktop
+    echo [DONE] Installation completed. Restart DSH Desktop.
 )
 echo.
 pause
