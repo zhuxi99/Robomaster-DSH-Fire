@@ -11,6 +11,30 @@ $ProfDest = Join-Path $DshRoot "profiles\desktop"
 $PlugDest = Join-Path $DshRoot "plugins"
 $PackDest = Join-Path $DshRoot "pack\third-party"
 
+function Copy-DirectoryContents {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Source,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Destination
+    )
+
+    if (-not (Test-Path -LiteralPath $Source -PathType Container)) {
+        throw "源目录不存在：$Source"
+    }
+
+    New-Item -ItemType Directory -Force -Path $Destination | Out-Null
+
+    $items = Get-ChildItem -LiteralPath $Source -Force
+    foreach ($item in $items) {
+        Copy-Item -LiteralPath $item.FullName `
+            -Destination $Destination `
+            -Recurse `
+            -Force
+    }
+}
+
 Write-Host "==============================================" -ForegroundColor Cyan
 Write-Host " RoboMaster DSH Desktop 安装包" -ForegroundColor Cyan
 Write-Host " 目标: $DshRoot" -ForegroundColor Cyan
@@ -18,12 +42,31 @@ Write-Host "==============================================" -ForegroundColor Cya
 
 # ---------- 1. 检查前置 ----------
 Write-Host "[1/8] 检查环境..." -ForegroundColor Yellow
-$nodeVer = node --version 2>$null
-if ($LASTEXITCODE -ne 0) { Write-Host " [错误] 未找到 Node.js，请先安装 Node >= 22" -ForegroundColor Red; exit 1 }
-$nodeMajor = [int]($nodeVer -replace 'v(\d+).*', '$1')
-if ($nodeMajor -lt 22) { Write-Host " [错误] Node.js 版本过低（$nodeMajor），需要 >= 22" -ForegroundColor Red; exit 1 }
-$pnpmVer = pnpm --version 2>$null
-if ($LASTEXITCODE -ne 0) { Write-Host " [错误] 未找到 pnpm，请先执行 npm i -g pnpm" -ForegroundColor Red; exit 1 }
+$nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+if (-not $nodeCommand) {
+    Write-Host " [错误] 未找到 Node.js，请先安装 Node >= 22" -ForegroundColor Red
+    exit 1
+}
+$nodeVer = & $nodeCommand.Source --version
+if ($LASTEXITCODE -ne 0 -or $nodeVer -notmatch '^v(\d+)') {
+    Write-Host " [错误] 无法识别 Node.js 版本：$nodeVer" -ForegroundColor Red
+    exit 1
+}
+$nodeMajor = [int]$Matches[1]
+if ($nodeMajor -lt 22) {
+    Write-Host " [错误] Node.js 版本过低（$nodeMajor），需要 >= 22" -ForegroundColor Red
+    exit 1
+}
+$pnpmCommand = Get-Command pnpm -ErrorAction SilentlyContinue
+if (-not $pnpmCommand) {
+    Write-Host " [错误] 未找到 pnpm，请先执行 npm i -g pnpm" -ForegroundColor Red
+    exit 1
+}
+$pnpmVer = & $pnpmCommand.Source --version
+if ($LASTEXITCODE -ne 0) {
+    Write-Host " [错误] pnpm 无法正常运行" -ForegroundColor Red
+    exit 1
+}
 Write-Host "    OK Node $nodeVer / pnpm $pnpmVer" -ForegroundColor Green
 
 # ---------- 2. 自研插件 ----------
@@ -43,7 +86,7 @@ foreach ($p in $pluginList) {
 # ---------- 3. 第三方 CAD 插件 ----------
 Write-Host "[3/8] 复制第三方 CAD 插件 -> .dsh\pack\third-party\" -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path $PackDest | Out-Null
-Copy-Item -Recurse -Force (Join-Path $RepoRoot "third-party\*") $PackDest
+Copy-DirectoryContents -Source (Join-Path $RepoRoot "third-party") -Destination $PackDest
 Write-Host "    OK dsh-cad / dsh-cad-review / dsh-3d-model-viewer"
 
 # ---------- 4. desktop profile 配置 ----------
@@ -63,10 +106,10 @@ Write-Host "    OK"
 Write-Host "[5/8] 复制提示词与预设" -ForegroundColor Yellow
 $promptDest = Join-Path $DshRoot "prompts"
 New-Item -ItemType Directory -Force -Path $promptDest | Out-Null
-Copy-Item -Force (Join-Path $RepoRoot "prompts\*") $promptDest
+Copy-DirectoryContents -Source (Join-Path $RepoRoot "prompts") -Destination $promptDest
 $presetDest = Join-Path $DshRoot ".agent-presets\liangshen"
 New-Item -ItemType Directory -Force -Path $presetDest | Out-Null
-Copy-Item -Force (Join-Path $RepoRoot "presets\liangshen\*") $presetDest
+Copy-DirectoryContents -Source (Join-Path $RepoRoot "presets\liangshen") -Destination $presetDest
 Write-Host "    OK prompts + presets"
 
 # ---------- 6. 记忆 ----------
@@ -128,3 +171,9 @@ Write-Host "  1. 完整重启 DSH Desktop（不是刷新页面）" -ForegroundCo
 Write-Host "  2. 若浏览器工具报缺内核：调用 browser_install" -ForegroundColor White
 Write-Host "  3. 验证插件：设置 - 插件，应能看到 CAD 插件" -ForegroundColor White
 Write-Host "==============================================" -ForegroundColor Cyan
+
+if (-not $installOk) {
+    exit 1
+}
+
+exit 0
