@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # RoboMaster DSH Desktop 一键安装脚本（Windows PowerShell）
 # 用法：双击 install.bat 即可，或手动执行：
 #   powershell -NoProfile -ExecutionPolicy Bypass -File install.ps1
