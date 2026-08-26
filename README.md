@@ -1,6 +1,6 @@
 # 🤖 RoboMaster DSH Desktop 整合包
 
-> 专为 RoboMaster 战队机械组打造的 DeepSeek Harness Desktop (Windows) 一键安装配置套件，开箱即用，与队长开发环境完全一致。
+> 专为 RoboMaster 战队机械组打造的 DeepSeek Harness Desktop (Windows) 一键安装配置套件，开箱即用，与负责人标准开发环境完全一致。
 
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](#-快速开始)
 [![Node Version](https://img.shields.io/badge/Node.js-≥22-339933?logo=nodedotjs&logoColor=white)](#-快速开始)
@@ -151,7 +151,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 </details>
 
 <details>
-<summary><b>Q3: 后续队长更新了新插件或提示词，队员如何升级同步？</b></summary>
+<summary><b>Q3: 后续仓库更新了新插件或提示词，队员如何升级同步？</b></summary>
 
 在仓库目录下拉取最新代码并重新运行安装脚本即可：
 ```powershell
