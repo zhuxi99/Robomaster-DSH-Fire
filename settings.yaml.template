@@ -33,7 +33,7 @@ llm-pi-ai:
       models:
         - id: grok-4.5
           contextWindow: 400000
-          maxTokens: <FILL-IN>
+          maxTokens: 4000
           input: []
           reasoningEfforts:
             off: null
@@ -360,6 +360,11 @@ llm-pi-ai:
         - id: "[free]gemini-3.7-flash"
           contextWindow: 400000
           input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
           compat:
             chatTemplateKwargs: {}
     leyanshi:
@@ -493,6 +498,11 @@ llm-pi-ai:
           name: gemini-3.7-flash
           contextWindow: 400000
           input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
           compat:
             chatTemplateKwargs: {}
     noo:
@@ -654,16 +664,7 @@ llm-pi-ai:
       api: openai-responses
       baseURL: https://nodexapi.it.com/v1
       models:
-        - id: gpt-5.6-sol
-          contextWindow: 400000
-          input: []
-          compat:
-            chatTemplateKwargs: {}
-        - id: gpt-5.6-terra
-          contextWindow: 400000
-          input: []
-          compat:
-            chatTemplateKwargs: {}
+        - id: gemini-3.7-flash
     wahuiliyi:
       displayName: wahuiliyi
       apiKeyEnv: <FILL-IN>
@@ -815,7 +816,7 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
     fastaitoken:
-      <FILL-IN>
+      displayName: fastaitoken
       apiKeyEnv: <FILL-IN>
       api: openai-responses
       baseURL: https://www.fastaitoken.com
@@ -988,6 +989,11 @@ llm-pi-ai:
           name: gemini-3.7-flash
           contextWindow: 400000
           input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
           compat:
             chatTemplateKwargs: {}
         - id: deepseek/deepseek-v4-pro-0813
@@ -1208,6 +1214,14 @@ llm-pi-ai:
         - id: deepseek-v4-flash-0731
         - id: kimi-k3
         - id: gemini-3.7-flash
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+          compat:
+            chatTemplateKwargs: {}
         - id: ox-alpha
         - id: deepseek-v4-flash-preview
       apiKeyEnv: <FILL-IN>
@@ -1256,6 +1270,14 @@ llm-pi-ai:
       baseURL: https://api.lmm.best/v1
       models:
         - id: gemini-3.7-flash
+          input: []
+          reasoningEfforts:
+            off: null
+            low: low
+            medium: medium
+            high: high
+          compat:
+            chatTemplateKwargs: {}
         - id: gemini-3.7-flash-high
       apiKeyEnv: <FILL-IN>
     baibei:
@@ -1265,12 +1287,41 @@ llm-pi-ai:
       baseURL: https://sub.100xlabs.space
       models:
         - id: claude-opus-5
+    seekai:
+      displayName: seekai
+      api: openai-responses
+      baseURL: https://seekai.cc/v1
+      models:
+        - id: claude-opus-5
+        - id: gpt-5-6-terra
+        - id: deepseek-v4-pro-0813
+        - id: gpt-5-6-luna
+        - id: DeepSeek-V4-Flash-0731
+        - id: claude-fable-5
+        - id: gpt-5.6-sol
+      apiKeyEnv: <FILL-IN>
+    dawwadawdwad:
+      displayName: 国模0.01x
+      apiKeyEnv: <FILL-IN>
+      api: anthropic-messages
+      baseURL: https://api.060913.xyz
+      models:
+        - id: deepseek-ai/deepseek-v4-flash-0731
+    agentrouter:
+      displayName: agentrouter
+      apiKeyEnv: <FILL-IN>
+      api: openai-responses
+      baseURL: https://agentrouter.org/v1
+      models:
+        - id: gpt-5.6-sol
+        - id: deepseek-v4-flash
+        - id: glm-5.3
 agent-default-model:
-  provider: lmm-2
-  model: "deepseek-v4-flash-0731"
-  reasoningEffort: max
+  provider: o10
+  model: "gemini-3.7-flash"
+  reasoningEffort: high
 permission:
-  defaultPreset: auto
+  defaultPreset: danger-full-access
 ui-conversation:
   busyEnter: queue
 pet:

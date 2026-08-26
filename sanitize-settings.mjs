@@ -30,8 +30,9 @@ const before = content.length
 let replacements = 0
 
 // 1. 敏感字段值替换（保留缩进与字段名）
+// 匹配明确的敏感属性（apiKey / token / secret / password / credential / apiKeyEnv 等）
 content = content.replace(
-  /^(\s*[A-Za-z_][A-Za-z0-9_]*?(?:key|token|secret|password|credential|apiKey|apikey|api_key)[A-Za-z0-9_]*\s*:\s*).+$/gim,
+  /^(\s*(?:apiKey|apikey|api_key|apiKeyEnv|token|secret|password|credential|accessToken|authToken)\s*:\s+).+$/gim,
   (m, prefix) => { replacements++; return `${prefix}<FILL-IN>` }
 )
 
