@@ -60,7 +60,6 @@ zhuxi99/robomaster-DSH-/
 │   └── dsh-restart-desktop/   # 桌面重启辅助插件
 ├── third-party/               # 第三方 CAD 插件（已预编译，Windows 免编译直接使用）
 │   ├── dsh-cad-review/        # v0.2.0 DXF 图纸确定性审查插件
-│   ├── dsh-3d-model-viewer/   # v0.1.1（已从 Windows 预设移除，Windows 插件源解析不到）
 │   └── dsh-cad/               # v0.1.0 OCCT 参数化建模工作台（含 lib/ 构建产物）
 ├── prompts/                   # 提示词资产（active.yml + 机械设计准则）
 ├── presets/liangshen/         # Agent 角色与工作流预设
