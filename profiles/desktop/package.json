@@ -7,7 +7,6 @@
     "@liustack/modlens": "3.18.3",
     "@nanmicoder/dsh-auto-mode": "^0.1.5",
     "@struktoai/mirage-dsh": "^0.0.1",
-    "dsh-3d-model-viewer": "file:../../pack/third-party/dsh-3d-model-viewer-0.1.1.tgz",
     "dsh-at-file": "github:omdsh-dev/dsh-at-file",
     "dsh-auto-collapse": "github:a179-sanae/dsh-auto-collapse#main",
     "dsh-better-sidebar": "^0.14.0",
@@ -59,8 +58,7 @@
         "dsh-webui-perf",
         "dsh-model-tuner-runtime",
         "@nanmicoder/dsh-auto-mode",
-        "dsh-cad-review",
-        "dsh-3d-model-viewer"
+        "dsh-cad-review"
       ]
     }
   }

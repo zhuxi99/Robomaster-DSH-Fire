@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { inspectDxf, reviewDxfFile } from '../lib/dxf.mjs'

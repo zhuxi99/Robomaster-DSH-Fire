@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * sanitize-settings.mjs — 把本机 ~/.dsh/settings.yaml 脱敏生成 settings.yaml.template
  *

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import readline from 'node:readline'
 import { inspectDxfText, reviewDxfText } from './lib/dxf.mjs'
 

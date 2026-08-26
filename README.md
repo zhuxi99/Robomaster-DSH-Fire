@@ -169,6 +169,12 @@ git pull origin main
 安装完成后记得**完整重启 DSH Desktop**。
 </details>
 
+<details>
+<summary><b>Q4: 第三方插件源码中包含 Linux 路径（如 `/tmp/`, `/usr/bin/`），Windows 能正常使用吗？</b></summary>
+
+**能正常使用。** 这些路径仅存在于测试代码和 FreeCAD 搜索候选列表中，不影响 Windows 环境下的核心功能。`dsh-cad` 已针对 Windows 进行了路径适配（会搜索 `C:\Program Files\` 下的 FreeCAD 安装），且所有运行时逻辑均使用 `os.tmpdir()` 等跨平台 API。如果你需要在 Windows 上运行这些测试用例，测试框架会自动使用系统临时目录。
+</details>
+
 ---
 
 ## 📝 备注与上游来源

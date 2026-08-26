@@ -172,7 +172,7 @@ describe('scene store', () => {
 
   it('rejects malformed view ids', async () => {
     const store = new SceneStore(fixturesDir)
-    expect(await store.get('../etc/passwd')).toBeNull()
+    expect(await store.get('../secrets.txt')).toBeNull()
     expect(await store.get('')).toBeNull()
   })
 })

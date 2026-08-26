@@ -1,4 +1,4 @@
-const fs = require('node:fs'), path = require('node:path')
+const fs = require('node:fs'), path = require('node:path'), os = require('node:os')
 globalThis.__dirname = process.cwd()
 const loaderPath = '/Users/kane/work/dsh-cad/node_modules/opencascade.js/dist/opencascade.wasm.js'
 const m = require(loaderPath)
@@ -19,13 +19,13 @@ const wasmBinary = fs.readFileSync(path.join(path.dirname(loaderPath), 'opencasc
   let bytes = null
   try { bytes = occt.FS.readFile('model.step') } catch (e) { console.log('FS read fail:', e.message.slice(0,60)) }
   console.log('STEP status:', status, 'memfs bytes:', bytes ? bytes.length : 'none')
-  if (bytes) fs.writeFileSync('/tmp/m0d.step', Buffer.from(bytes))
+  if (bytes) fs.writeFileSync(path.join(os.tmpdir(), 'm0d.step'), Buffer.from(bytes))
 
   // STL the same way
   const stl = new occt.StlAPI_Writer()
   stl.Write(plate, 'model.stl')
   const stlBytes = occt.FS.readFile('model.stl')
-  fs.writeFileSync('/tmp/m0d.stl', Buffer.from(stlBytes))
+  fs.writeFileSync(path.join(os.tmpdir(), 'm0d.stl'), Buffer.from(stlBytes))
   console.log('STL memfs bytes:', stlBytes.length)
   process.exit(0)
 }).catch(e => { console.log('FAIL', e.message); process.exit(1) })
