@@ -38,7 +38,7 @@
 
 ## ✨ 特性一览
 
-- 🛠️ **三大 CAD 核心套件**：预置已构建的 DXF 图纸审查、3D 模型查看器以及 OCCT 参数化建模工作台，Windows 免编译。
+- 🛠️ **两大 CAD 核心套件**：预置已构建的 DXF 图纸审查和 OCCT 参数化建模工作台，Windows 免编译。
 - 📦 **队内自研插件全家桶**：集成 RoboMaster 工作台、核心机器人工具、模型批量配置及桌面快速重启插件。
 - ⚡ **双击即可安装**：内置 `install.bat`，机械组队友**双击文件**就能自动完成全部安装，无需打开终端敲任何命令。
 - 🔒 **敏感数据零泄漏**：聊天记录、API Keys、私有项目记忆与本地数据库均已严格隔离并被 `.gitignore` 排除。
@@ -60,7 +60,7 @@ zhuxi99/robomaster-DSH-/
 │   └── dsh-restart-desktop/   # 桌面重启辅助插件
 ├── third-party/               # 第三方 CAD 插件（已预编译，Windows 免编译直接使用）
 │   ├── dsh-cad-review/        # v0.2.0 DXF 图纸确定性审查插件
-│   ├── dsh-3d-model-viewer/   # v0.1.1 3D 模型查看器 + LLM JSON 转译
+│   ├── dsh-3d-model-viewer/   # v0.1.1（已从 Windows 预设移除，Windows 插件源解析不到）
 │   └── dsh-cad/               # v0.1.0 OCCT 参数化建模工作台（含 lib/ 构建产物）
 ├── prompts/                   # 提示词资产（active.yml + 机械设计准则）
 ├── presets/liangshen/         # Agent 角色与工作流预设
@@ -81,7 +81,7 @@ zhuxi99/robomaster-DSH-/
 - **操作系统**：Windows 10 / 11 (x64)
 - **Node.js**：`≥ 22.0.0`
 - **pnpm**：`≥ 10.0.0`（如未安装，可在终端运行 `npm i -g pnpm` 安装）
-- **客户端**：已正确安装 **DSH Desktop** 桌面客户端
+- **客户端**：**DSH Desktop** 桌面客户端 —— 如果尚未安装，`install.bat` 会自动从 GitHub 下载并静默安装固定版本 **v2.0.0**（约 141MB），无需手动准备
 
 ### 2. 克隆仓库
 
@@ -94,7 +94,7 @@ cd robomaster-DSH-
 
 ### 3. 运行一键安装
 
-> 💡 **最简单的方式：直接双击 `install.bat`**，它会自动完成全部安装步骤，全程不需要打开终端、不需要敲任何命令。安装完成后窗口会自动提示结果。
+> 💡 **最简单的方式：直接双击 `install.bat`**，它会自动完成全部安装步骤——包括自动下载安装 **DSH Desktop v2.0.0**（若本机未装）、复制全部配置、安装依赖，全程不需要打开终端、不需要敲任何命令。安装完成后窗口会自动提示结果。
 
 | 方式 | 操作 | 适合人群 |
 | :--- | :--- | :--- |
@@ -107,6 +107,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
 > ⚠️ 如果之前用旧版 `install.ps1` 安装报过错，先执行 `git pull` 拉到最新代码，再双击 `install.bat` 重试。
+>
+> 📌 **关于 DSH Desktop 版本**：本整合包固定使用 v2.0.0（GitHub 官方直链），不跟随自动更新，保证配置稳定兼容。若本机已安装其他版本，脚本会**保持现状不覆盖**，避免破坏已有环境。
 
 ### 4. 关键：重启客户端
 
@@ -116,12 +118,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 
 ## 🔍 安装后验证
 
-重新启动 DSH Desktop 后，请对照下表验证三大 CAD 插件及核心功能是否加载正常：
+重新启动 DSH Desktop 后，请对照下表验证 CAD 插件及核心功能是否加载正常：
 
 | 插件名称 | 版本 | 验证方式 | 预期效果 |
 | :--- | :--- | :--- | :--- |
 | **dsh-cad-review** | `v0.2.0` | 在会话中发送：`审查 XX.dxf`<br>或在终端运行：`dsh-cad-review review 图纸.dxf` | 输出结构化 DXF 规则审查报告 |
-| **dsh-3d-model-viewer** | `v0.1.1` | 查看右侧面板中的 **"三维模型查看器"**，尝试拖入 `OBJ` / `STL` / `STEP` 文件 | 面板正常渲染 3D 模型并可旋转缩放 |
 | **dsh-cad** | `v0.1.0` | 打开会话中的 **"3D"** Tab，或让 AI 调用 `cad_view` / `cad_volume` 工具 | 调出 OCCT 参数化建模与体积计算组件 |
 
 ---
@@ -179,5 +180,5 @@ git pull origin main
 
 ## 📝 备注与上游来源
 
-- 本整合包中包含的第三方插件（`dsh-cad-review`, `dsh-3d-model-viewer`, `dsh-cad`）均归原作者所有，各自遵循独立的开源许可证，具体可见各插件目录内的说明文档。
+- 本整合包中包含的第三方插件（`dsh-cad-review`, `dsh-cad`）均归原作者所有，各自遵循独立的开源许可证，具体可见各插件目录内的说明文档。
 - 队内自研插件由 RoboMaster 战队研发组维护。如有 Bug 反馈或功能需求，请在队内群或提交 Issue 联系。
