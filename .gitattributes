@@ -1,0 +1,30 @@
+# Windows 端行尾与二进制约定
+#
+# 队友在 Windows 上 clone 后直接双击 .bat / .ps1 运行，行尾必须是 CRLF：
+# 纯 LF 的 .bat 在遇到多行 if ( ... ) else ( ... ) 块时会被 cmd.exe 误解析。
+# .tgz 是离线插件包，必须按二进制处理，任何行尾转换都会损坏归档。
+
+* text=auto
+
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.mjs text eol=lf
+*.js  text eol=lf
+*.py  text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md  text eol=lf
+
+settings.yaml.template text eol=lf
+
+*.tgz binary
+*.exe binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.wasm binary
+*.node binary
+*.db binary
+*.sqlite binary

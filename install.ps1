@@ -49,6 +49,80 @@ function Copy-DirectoryContents {
     }
 }
 
+function Get-FileTgzDependencies {
+    param([Parameter(Mandatory = $true)][string]$PackageJsonPath)
+    $found = @()
+    if (-not (Test-Path -LiteralPath $PackageJsonPath -PathType Leaf)) { return $found }
+    try {
+        $meta = Get-Content -LiteralPath $PackageJsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    } catch {
+        Write-Host "    [提示] 无法解析 $PackageJsonPath : $_" -ForegroundColor DarkGray
+        return $found
+    }
+    if (-not $meta.dependencies) { return $found }
+    foreach ($prop in $meta.dependencies.PSObject.Properties) {
+        $spec = [string]$prop.Value
+        if ($spec.StartsWith("file:") -and $spec.EndsWith(".tgz")) {
+            $found += [pscustomobject]@{
+                Name     = $prop.Name
+                Relative = $spec.Substring(5).Replace('/', '\')
+            }
+        }
+    }
+    return $found
+}
+
+function Resolve-RelativePath {
+    param(
+        [Parameter(Mandatory = $true)][string]$BasePath,
+        [Parameter(Mandatory = $true)][string]$Relative
+    )
+    return [IO.Path]::GetFullPath([IO.Path]::Combine($BasePath, $Relative))
+}
+
+function Test-PackageEntry {
+    param([Parameter(Mandatory = $true)][string]$PackageDir)
+    if (-not (Test-Path -LiteralPath $PackageDir -PathType Container)) { return $false }
+    $pj = Join-Path $PackageDir "package.json"
+    if (-not (Test-Path -LiteralPath $pj -PathType Leaf)) { return $false }
+    try {
+        $meta = Get-Content -LiteralPath $pj -Raw -Encoding UTF8 | ConvertFrom-Json
+    } catch {
+        return $false
+    }
+    $entry = "index.js"
+    if ($meta.main) { $entry = [string]$meta.main }
+    $entryPath = Join-Path $PackageDir ($entry.Replace('/', '\'))
+    if (Test-Path -LiteralPath $entryPath -PathType Leaf) { return $true }
+    if (Test-Path -LiteralPath "$entryPath.js" -PathType Leaf) { return $true }
+    if (Test-Path -LiteralPath (Join-Path $entryPath "index.js") -PathType Leaf) { return $true }
+    return $false
+}
+
+function Expand-TgzPackage {
+    param(
+        [Parameter(Mandatory = $true)][string]$TgzPath,
+        [Parameter(Mandatory = $true)][string]$DestDir,
+        [Parameter(Mandatory = $true)][string]$Extractor
+    )
+    if (-not (Test-Path -LiteralPath $TgzPath -PathType Leaf)) {
+        Write-Host "    [错误] 找不到离线包：$TgzPath" -ForegroundColor Red
+        return $false
+    }
+    if (-not (Test-Path -LiteralPath $Extractor -PathType Leaf)) {
+        Write-Host "    [错误] 找不到解包脚本：$Extractor" -ForegroundColor Red
+        return $false
+    }
+    # node 的输出直接写到宿主，避免混进函数返回值（PS 函数会返回所有未捕获输出）
+    & node $Extractor $TgzPath $DestDir | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "    [错误] 解包失败：$TgzPath" -ForegroundColor Red
+        return $false
+    }
+    return $true
+}
+
+
 Write-Host "==============================================" -ForegroundColor Cyan
 Write-Host " ⚡ 太原工业学院 · 火线战队 DSH 全自动一键部署" -ForegroundColor Cyan
 Write-Host " 包含：DSH Desktop 官方客户端 + 17 个离线插件" -ForegroundColor Cyan
@@ -262,7 +336,8 @@ Write-Host "[9/9] 安装本地离线依赖（pnpm install）..." -ForegroundColo
 # dsh-cad 曾用 link: 分发，会在 node_modules 留下指向源码目录的符号链接／junction。
 # 源码目录没有 lib/（被它自己的 .gitignore 排除），旧链接残留会让 DSH 继续报
 # ERR_MODULE_NOT_FOUND。现在改用 .tgz，安装前先清掉旧链接，让 pnpm 重新解包。
-$staleCad = Join-Path $ProfDest "node_modules\dsh-cad"
+$nodeModules = Join-Path $ProfDest "node_modules"
+$staleCad = Join-Path $nodeModules "dsh-cad"
 if (Test-Path -LiteralPath $staleCad) {
     $item = Get-Item -LiteralPath $staleCad -Force
     if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
@@ -270,7 +345,7 @@ if (Test-Path -LiteralPath $staleCad) {
             $item.Delete()
             Write-Host "    已清理旧的 dsh-cad 链接（改用离线 .tgz）" -ForegroundColor DarkGray
         } catch {
-            Write-Host "    [提示] 旧 dsh-cad 链接清理失败，pnpm 可能自行覆盖：$_" -ForegroundColor DarkGray
+            Write-Host "    [提示] 旧 dsh-cad 链接清理失败，稍后会兜底解包：$_" -ForegroundColor DarkGray
         }
     }
 }
@@ -279,13 +354,45 @@ Push-Location $ProfDest
 $installOk = $true
 try {
     pnpm install
-    if ($LASTEXITCODE -ne 0) { throw "pnpm install 失败" }
-    Write-Host "    OK 全部 17 个插件依赖就绪" -ForegroundColor Green
+    if ($LASTEXITCODE -ne 0) { throw "pnpm install 返回非零退出码" }
+    Write-Host "    OK pnpm install 完成" -ForegroundColor Green
 } catch {
     Write-Host "    [错误] $_" -ForegroundColor Red
+    Write-Host "    继续做离线插件自检，能补的先补上" -ForegroundColor Yellow
     $installOk = $false
 } finally {
     Pop-Location
+}
+
+# pnpm 并不保证会重新处理 file: 依赖（缓存命中、残留旧链接、install 中途失败
+# 都可能让 node_modules 里缺掉入口文件），而 DSH 启动时只要有一个插件入口缺失
+# 就整棵插件树加载失败。这里逐个校验 package.json 里所有 file:*.tgz 依赖的真实
+# 入口文件，缺了就用 extract-tgz.mjs 直接解包补上，不再依赖 pnpm 的心情。
+Write-Host "    校验离线 .tgz 插件入口..." -ForegroundColor Yellow
+$extractor = Join-Path $RepoRoot "extract-tgz.mjs"
+$tgzDeps = @(Get-FileTgzDependencies -PackageJsonPath $pkgDest)
+$repairedPkgs = @()
+$brokenPkgs = @()
+foreach ($dep in $tgzDeps) {
+    $pkgDir = Join-Path $nodeModules $dep.Name
+    if (Test-PackageEntry -PackageDir $pkgDir) { continue }
+    $tgzPath = Resolve-RelativePath -BasePath $ProfDest -Relative $dep.Relative
+    Write-Host "    补装缺失的离线插件：$($dep.Name)" -ForegroundColor Yellow
+    $expanded = [bool](Expand-TgzPackage -TgzPath $tgzPath -DestDir $pkgDir -Extractor $extractor)
+    if ($expanded -and (Test-PackageEntry -PackageDir $pkgDir)) {
+        $repairedPkgs += $dep.Name
+    } else {
+        $brokenPkgs += $dep.Name
+    }
+}
+if ($repairedPkgs.Count -gt 0) {
+    Write-Host "    已补装：$($repairedPkgs -join ', ')" -ForegroundColor Green
+}
+if ($brokenPkgs.Count -gt 0) {
+    Write-Host "    [错误] 仍然缺失：$($brokenPkgs -join ', ')" -ForegroundColor Red
+    $installOk = $false
+} else {
+    Write-Host "    OK $($tgzDeps.Count) 个离线 .tgz 插件入口齐全" -ForegroundColor Green
 }
 
 # ---------- 完成 ----------
@@ -300,6 +407,9 @@ Write-Host "==============================================" -ForegroundColor Cya
 Write-Host " 接下来：" -ForegroundColor Cyan
 Write-Host "  1. 打开桌面上的【DSH Desktop】图标" -ForegroundColor White
 Write-Host "  2. 打开 设置 -> 插件，17 个火线战队工具全量就绪！" -ForegroundColor White
+Write-Host "" -ForegroundColor White
+Write-Host " 万一 DSH 还是打不开：双击 diagnose.bat 做一次现场自检，" -ForegroundColor DarkGray
+Write-Host " 把输出发回排查（只读检查，不会改任何文件）。" -ForegroundColor DarkGray
 Write-Host "==============================================" -ForegroundColor Cyan
 
 if (-not $installOk) { exit 1 }

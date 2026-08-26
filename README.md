@@ -123,7 +123,15 @@ zhuxi99/Robomaster-DSH-Fire/
 ├── memories/                  # 脱敏用户档案 USER.md + 全局记忆 MEMORY.md + memory.md
 ├── install.bat                # 🖱️ 双击一键安装入口（推荐，无需敲命令）
 ├── install.ps1                # Windows 自动化安装脚本主体
+├── diagnose.bat               # 🩺 双击现场自检（只读，启动失败时先跑这个）
+├── diagnose.ps1               # 自检脚本主体
+├── repair.bat                 # 🔧 双击就地修复损坏的 settings.yaml（保留已填密钥）
+├── extract-tgz.mjs            # 纯 Node 的 .tgz 解包器（离线插件入口缺失时兜底补装）
+├── validate-settings.mjs      # settings.yaml 双层校验器（文本 lint + 严格 YAML 解析）
+├── validate_settings.py       # 同一套规则的 Python 实现（交叉验证）
+├── repair-settings.mjs        # settings.yaml 就地修复器
 ├── sanitize-settings.mjs      # settings.yaml 脱敏生成脚本（生成 settings.yaml.template）
+├── sync-release.mjs           # 源机一键同步：打包插件 + 清单闸门 + 重生成模板
 └── .gitignore                 # 敏感数据与本地运行时文件排除清单
 ```
 
@@ -192,6 +200,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 | **dsh-prompt-manager** | `0.1.0` | 打开提示词管理 | 可查看/发布提示词资产 |
 
 > 💡 也可到 **设置 → 插件** 页面查看全部已加载插件，确认无报错项。
+
+### 🩺 启动失败时的第一步：双击 `diagnose.bat`
+
+DSH Desktop 打不开、或者插件页一片报错时，**先双击 `diagnose.bat`**。它是只读自检，不会修改任何文件，一次性把排查需要的事实全打出来：
+
+| 检查项 | 说明 |
+| :--- | :--- |
+| Node / pnpm 版本 | 确认环境满足 Node ≥ 22、pnpm ≥ 10 |
+| 仓库 HEAD 与分支 | 判断是否真的 `git pull` 到了最新代码 |
+| `.dsh\pack\third-party` | 12 个离线 `.tgz` 是否都已复制到位 |
+| **每个插件的入口文件** | 逐个校验 `node_modules\<插件>` 是实体目录还是残留符号链接、`main` 指向的入口文件是否真的存在 |
+| `settings.yaml` 语法 | 调用 `validate-settings.mjs` 真解析一遍 |
+| 最近的启动错误 | 自动去重，只列最近 8 类错误 |
+
+输出同时保存到 `%USERPROFILE%\.dsh\pack-diagnose.txt`，整段发回即可定位问题。
+
+如果自检报告里出现 **「入口缺失」**，直接双击 `install.bat` 重跑一次即可：安装脚本第 9 步会在 `pnpm install` 之后逐个校验离线插件入口，缺哪个就用 `extract-tgz.mjs` 直接解包补上，不再依赖 pnpm 是否愿意重新处理 `file:` 依赖。
 
 ---
 

@@ -122,6 +122,120 @@ console.log('\n[2/4] 重新打包 dsh-cad（构建产物不在 git 里，必须�
   console.log(`  ✅ dsh-cad-${version}.tgz（含 lib/index.js，已核对 package.json 引用）`);
 }
 
+// 全量清单闸门：profiles/desktop/package.json 里每一个 file:*.tgz 依赖，
+// 都必须在 third-party/ 里有对应 tarball，且 tarball 内真的含它声明的入口文件。
+// 只要有一个入口缺失，DSH 在 host-boot 阶段就会整棵插件树加载失败。
+console.log('\n[2.5/4] 核对全部离线 .tgz 依赖的入口文件...');
+{
+  const PREFIX = 'file:../../pack/third-party/';
+  const pkgPath = path.join(REPO_ROOT, 'profiles', 'desktop', 'package.json');
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+  const problems = [];
+
+  const extractor = path.join(REPO_ROOT, 'extract-tgz.mjs');
+  if (!fs.existsSync(extractor)) {
+    problems.push('缺少 extract-tgz.mjs（install.ps1 第 9 步的兜底解包器）');
+  }
+
+  const tgzDeps = Object.entries(pkg.dependencies || {}).filter(
+    ([, spec]) => typeof spec === 'string' && spec.startsWith('file:') && spec.endsWith('.tgz'),
+  );
+
+  for (const [name, spec] of tgzDeps) {
+    if (!spec.startsWith(PREFIX)) {
+      problems.push(`${name}: 依赖写法应为 ${PREFIX}<file>.tgz，当前是 ${spec}`);
+      continue;
+    }
+    const tgz = path.join(THIRD_PARTY, path.basename(spec));
+    if (!fs.existsSync(tgz)) {
+      problems.push(`${name}: 找不到 ${path.relative(REPO_ROOT, tgz)}`);
+      continue;
+    }
+    let listed;
+    try {
+      listed = execSync(`tar tzf "${tgz}"`, { encoding: 'utf8' }).split('\n');
+    } catch (err) {
+      problems.push(`${name}: tarball 无法读取（${err.message}）`);
+      continue;
+    }
+    let main = 'index.js';
+    try {
+      const raw = execSync(`tar xzfO "${tgz}" package/package.json`, { encoding: 'utf8' });
+      const meta = JSON.parse(raw);
+      if (meta.main) main = String(meta.main);
+      if (meta.name && meta.name !== name) {
+        problems.push(`${name}: tarball 内包名是 ${meta.name}`);
+      }
+    } catch (err) {
+      problems.push(`${name}: tarball 内缺少 package/package.json`);
+      continue;
+    }
+    const entry = `package/${main.replace(/^\.\//, '')}`;
+    const hasEntry =
+      listed.includes(entry) ||
+      listed.includes(`${entry}.js`) ||
+      listed.includes(`${entry}/index.js`);
+    if (!hasEntry) {
+      problems.push(`${name}: tarball 内缺少入口 ${entry}`);
+      continue;
+    }
+    console.log(`  ✅ ${name} -> ${path.basename(tgz)} (${main})`);
+  }
+
+  if (problems.length > 0) {
+    console.error('\n  ❌ 离线依赖清单有问题，分发出去会让队友卡在 host-boot：');
+    for (const p of problems) console.error(`     - ${p}`);
+    process.exit(1);
+  }
+  console.log(`  ✅ ${tgzDeps.length} 个离线 .tgz 依赖入口齐全`);
+
+  // link: 依赖走符号链接，源目录本身必须把入口文件提交进 git。
+  // dsh-cad 当初就是踩了这个坑：它的 .gitignore 含 lib/，clone 下来只有源码没有入口。
+  const linkDeps = Object.entries(pkg.dependencies || {}).filter(
+    ([, spec]) => typeof spec === 'string' && spec.startsWith('link:'),
+  );
+  const linkProblems = [];
+  for (const [name, spec] of linkDeps) {
+    const rel = spec
+      .slice(5)
+      .replace('../../pack/', '')
+      .replace('../../plugins/', 'custom-plugins/');
+    const srcDir = path.join(REPO_ROOT, rel);
+    const srcJson = path.join(srcDir, 'package.json');
+    if (!fs.existsSync(srcJson)) {
+      linkProblems.push(`${name}: 源目录缺 package.json（${rel}）`);
+      continue;
+    }
+    const main = String(JSON.parse(fs.readFileSync(srcJson, 'utf8')).main || 'index.js').replace(
+      /^\.\//,
+      '',
+    );
+    const entry = path.join(srcDir, main);
+    if (!fs.existsSync(entry)) {
+      linkProblems.push(`${name}: 入口 ${rel}/${main} 在本机就不存在`);
+      continue;
+    }
+    // 关键：入口必须被 git 跟踪，否则队友 clone 下来就是空的
+    try {
+      execSync(`git -C "${REPO_ROOT}" ls-files --error-unmatch "${rel}/${main}"`, {
+        stdio: 'pipe',
+      });
+    } catch {
+      linkProblems.push(
+        `${name}: 入口 ${rel}/${main} 未被 git 跟踪（被 .gitignore 排除？请改成 .tgz 分发）`,
+      );
+      continue;
+    }
+    console.log(`  ✅ ${name} -> link:${rel} (${main}，已提交进 git)`);
+  }
+  if (linkProblems.length > 0) {
+    console.error('\n  ❌ link: 依赖的入口文件不会跟着 clone 下来：');
+    for (const p of linkProblems) console.error(`     - ${p}`);
+    process.exit(1);
+  }
+  console.log(`  ✅ ${linkDeps.length} 个 link: 依赖入口均已提交进 git`);
+}
+
 console.log('\n[3/4] 同步自研插件与提示词...');
 execSync(`cp -r ~/.dsh/plugins/robomaster-studio "${REPO_ROOT}/custom-plugins/" 2>/dev/null || true`);
 execSync(`cp -r ~/.dsh/plugins/dsh-robomaster-core "${REPO_ROOT}/custom-plugins/" 2>/dev/null || true`);
