@@ -6,7 +6,7 @@ llm-pi-ai:
   providers:
     grok:
       displayName: "1412"
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: GROK_API_KEY
       api: openai-completions
       baseURL: https://1412520.cyou/v1
       models:
@@ -27,7 +27,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     q:
       displayName: 510刀
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: Q_API_KEY
       api: openai-completions
       baseURL: https://www.codemonkey2025.com/v1
       models:
@@ -46,7 +46,7 @@ llm-pi-ai:
             supportsReasoningEffort: true
             chatTemplateKwargs: {}
     a:
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: A_API_KEY
       api: openai-responses
       baseURL: https://fxqidian.de5.net/v1
       models:
@@ -65,7 +65,7 @@ llm-pi-ai:
       displayName: "分享奇点"
     kan:
       displayName: 247kan
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: KAN_API_KEY
       api: openai-responses
       baseURL: https://api.247kan.com
       models:
@@ -110,7 +110,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     futureppo:
       displayName: futureppo
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: FUTUREPPO_API_KEY
       api: openai-completions
       baseURL: https://api.futureppo.top/v1
       models:
@@ -128,7 +128,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     kan2:
       displayName: 247kan 0.04x
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: KAN2_API_KEY
       api: openai-responses
       baseURL: https://api.247kan.com/v1
       models:
@@ -173,7 +173,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     lmm:
       displayName: lmm
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LMM_API_KEY
       api: openai-responses
       baseURL: https://api.lmm.best/v1
       models:
@@ -215,7 +215,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     vsllm:
       displayName: 维云
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: VSLLM_API_KEY
       api: openai-completions
       baseURL: https://vsllm.com/v1
       models:
@@ -318,7 +318,7 @@ llm-pi-ai:
         - id: gemini-3.7-flash-api
     newapi:
       displayName: columbina
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: NEWAPI_API_KEY
       api: openai-responses
       baseURL: https://newapi.columbina.eu.org/v1
       models:
@@ -348,7 +348,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     aiwanai:
       displayName: aiwanai
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AIWANAI_API_KEY
       api: openai-responses
       baseURL: https://api.aiwanai.cc/v1
       models:
@@ -369,7 +369,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     leyanshi:
       displayName: leyanshi
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LEYANSHI_API_KEY
       api: openai-responses
       baseURL: https://gy.leyanshi.me/v1
       models:
@@ -395,7 +395,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     llmhost:
       displayName: llmhost公益站
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LLMHOST_API_KEY
       api: openai-responses
       baseURL: https://llmhost.net/v1
       models:
@@ -421,7 +421,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     tianluo:
       displayName: 村长的付费站
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: TIANLUO_API_KEY
       api: openai-responses
       baseURL: https://new.tianluo.ccwu.cc/v1
       models:
@@ -432,7 +432,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     wtf:
       displayName: "17 每天调用600次"
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: WTF_API_KEY
       api: openai-responses
       baseURL: https://api.17.wtf/v1
       models:
@@ -443,7 +443,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     rota:
       displayName: rota
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: ROTA_API_KEY
       api: openai-completions
       baseURL: https://ai.rota.fans/v1
       models:
@@ -464,7 +464,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     vyceai:
       displayName: vyceai
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: VYCEAI_API_KEY
       api: openai-completions
       baseURL: https://vyceai.com/v1
       models:
@@ -490,7 +490,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     o10:
       displayName: 哈基米的
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: O10_API_KEY
       api: openai-responses
       baseURL: https://o10.top/v1
       models:
@@ -507,7 +507,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     noo:
       displayName: linuxsb包姐的
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: NOO_API_KEY
       api: openai-responses
       baseURL: https://newapi.noo.cool
       models:
@@ -523,7 +523,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     x:
       displayName: 不降智免费grok
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: X_API_KEY
       api: openai-completions
       baseURL: https://x-api.cfd/v1
       models:
@@ -534,7 +534,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     qidian7:
       displayName: 奇点
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: QIDIAN7_API_KEY
       api: openai-responses
       baseURL: https://qidian7.de5.net/v1
       models:
@@ -552,7 +552,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     aihub:
       displayName: aihub
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AIHUB_API_KEY
       api: openai-responses
       baseURL: https://aihub.top/v1
       models:
@@ -570,7 +570,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     renai:
       displayName: renai
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: RENAI_API_KEY
       api: openai-responses
       baseURL: https://renai.uno
       models:
@@ -588,7 +588,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     ecvaixs:
       displayName: linux免费的
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: ECVAIXS_API_KEY
       api: openai-responses
       baseURL: https://sub.ecvaixs.cn
       models:
@@ -612,7 +612,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     sheapi:
       displayName: sheapi
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: SHEAPI_API_KEY
       api: openai-responses
       baseURL: https://www.sheapi.cc/v1
       models:
@@ -628,7 +628,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     ai8:
       displayName: ai8
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AI8_API_KEY
       api: openai-responses
       baseURL: https://ai8.my/v1
       models:
@@ -649,7 +649,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     aizzz:
       displayName: aizzz
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AIZZZ_API_KEY
       api: openai-responses
       baseURL: https://api.aizzz.xyz/v1
       models:
@@ -660,14 +660,14 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     nodexapi:
       displayName: nodexapi
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: NODEXAPI_API_KEY
       api: openai-responses
       baseURL: https://nodexapi.it.com/v1
       models:
         - id: gemini-3.7-flash
     wahuiliyi:
       displayName: wahuiliyi
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: WAHUILIYI_API_KEY
       api: openai-responses
       baseURL: https://api2.wahuiliyi.cn
       models:
@@ -691,7 +691,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     fineapi:
       displayName: 多多ai，0.1xluna
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: FINEAPI_API_KEY
       api: openai-responses
       baseURL: https://quiteai.autos
       models:
@@ -721,7 +721,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     allinai:
       displayName: 每天3$体验一个月50$
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: ALLINAI_API_KEY
       api: openai-responses
       baseURL: https://api-hk.allinai.shop/v1
       models:
@@ -739,7 +739,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     xqapi:
       displayName: xqapi 0.01xluna
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: XQAPI_API_KEY
       api: openai-responses
       baseURL: https://xqapi.com/v1
       models:
@@ -750,7 +750,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     sudoflow:
       displayName: sudoflow
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: SUDOFLOW_API_KEY
       api: openai-responses
       baseURL: https://sudoflow.top/v1
       models:
@@ -766,7 +766,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     bytecatcode:
       displayName: bytecatcode
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: BYTECATCODE_API_KEY
       api: openai-responses
       baseURL: https://www.bytecatcode.org/v1
       models:
@@ -792,7 +792,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     renai2:
       displayName: renai-float 0.065x
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: RENAI2_API_KEY
       api: openai-responses
       baseURL: https://renai.uno
       models:
@@ -804,7 +804,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     renai2-fast:
       displayName: renai-float 0.065x Fast
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: RENAI2_API_KEY
       api: openai-responses
       baseURL: https://renai.uno
       serviceTier: priority
@@ -817,7 +817,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     fastaitoken:
       displayName: fastaitoken
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: FASTAITOKEN_API_KEY
       api: openai-responses
       baseURL: https://www.fastaitoken.com
       models:
@@ -835,7 +835,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     linuxdo:
       displayName: linuxdo
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LINUXDO_API_KEY
       api: openai-completions
       baseURL: http://47.129.182.84/v1
       models:
@@ -864,10 +864,10 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: TRUE_SOTA_API_KEY
     teamorouter:
       displayName: 每天免费ds额度
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: TEAMOROUTER_API_KEY
       api: openai-completions
       baseURL: https://api.teamorouter.com/v1
       models:
@@ -903,7 +903,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: NIKO_PRO_2_API_KEY
     x-api:
       displayName: x-api
       api: openai-responses
@@ -914,7 +914,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: X_API_API_KEY
     custom-provider:
       displayName: 鸡哥
       api: openai-responses
@@ -940,7 +940,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_API_KEY
     renrenai:
       displayName: renrenai
       api: openai-responses
@@ -956,7 +956,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: RENRENAI_API_KEY
     renai-luna:
       displayName: renai luna
       api: openai-responses
@@ -967,7 +967,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: RENAI_LUNA_API_KEY
     s3ai:
       displayName: S3AI
       api: openai-responses
@@ -978,10 +978,10 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: S3AI_API_KEY
     mnbv:
       displayName: nexusmmo外国公益站
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: MNBV_API_KEY
       api: openai-responses
       baseURL: https://api.nexusmmo.store
       models:
@@ -1010,7 +1010,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
     chatanywhere:
       displayName: 每日10000点额度
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CHATANYWHERE_API_KEY
       api: openai-responses
       baseURL: https://api.chatanywhere.org
       models:
@@ -1049,10 +1049,10 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: KSCSNKLI_API_KEY
     whitedream:
       displayName: 人人管转ds 0.1x
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: WHITEDREAM_API_KEY
       api: openai-completions
       baseURL: https://llm.whitedream.top/v1
       models:
@@ -1064,7 +1064,7 @@ llm-pi-ai:
         - id: deepseek-v4-pro
     b-ai:
       displayName: b-ai
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: B_AI_API_KEY
       api: openai-completions
       baseURL: https://api.b.ai/v1
       models:
@@ -1113,7 +1113,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_3_API_KEY
     custom-provider-4:
       displayName: 外国佬的公益站
       api: openai-responses
@@ -1134,7 +1134,7 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
           contextWindow: 400000
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_4_API_KEY
     sheapi-2:
       displayName: sheapi
       api: openai-responses
@@ -1155,10 +1155,10 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
           contextWindow: 400000
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: SHEAPI_2_API_KEY
     mcgrox:
       displayName: mcgrox ceshi
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: MCGROX_API_KEY
       api: openai-completions
       baseURL: https://www.mcgrox.top/
       models:
@@ -1178,7 +1178,7 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
           contextWindow: 400000
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AIZZZ_2_API_KEY
     custom-provider-2:
       displayName: 橘子
       api: anthropic-messages
@@ -1189,7 +1189,7 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
           contextWindow: 400000
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_2_API_KEY
     lmm-2:
       displayName: lmm国模
       api: openai-completions
@@ -1205,7 +1205,7 @@ llm-pi-ai:
           input: []
           compat:
             chatTemplateKwargs: {}
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LMM_2_API_KEY
     custom-provider-5:
       displayName: jsper
       api: openai-responses
@@ -1224,7 +1224,7 @@ llm-pi-ai:
             chatTemplateKwargs: {}
         - id: ox-alpha
         - id: deepseek-v4-flash-preview
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_5_API_KEY
     freey-luna:
       displayName: freey-luna
       api: openai-responses
@@ -1232,10 +1232,10 @@ llm-pi-ai:
       models:
         - id: openai/gpt-5.6-luna
         - id: deepseek-v4-flash-0731-free
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: FREEY_LUNA_API_KEY
     laoda:
       displayName: 老大
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LAODA_API_KEY
       api: openai-responses
       baseURL: https://api.lmm.best/v1
       models:
@@ -1248,7 +1248,7 @@ llm-pi-ai:
         - id: gpt-5.6-luna
         - id: gpt-5.6-sol
         - id: gpt-5.6-terra
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AI_0_1X_API_KEY
     ai:
       displayName: 星海ai 国模
       api: openai-responses
@@ -1256,14 +1256,14 @@ llm-pi-ai:
       models:
         - id: deepseek-v4-flash
         - id: deepseek-v4-pro
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AI_API_KEY
     custom-provider-6:
       displayName: " 星期五API"
       api: openai-completions
       baseURL: https://api.fri5.top/v1
       models:
         - id: NI【官方/按量】gpt-5.6-luna
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: CUSTOM_PROVIDER_6_API_KEY
     lmmlmm:
       displayName: lmm gemini 0.3x
       api: openai-responses
@@ -1279,10 +1279,10 @@ llm-pi-ai:
           compat:
             chatTemplateKwargs: {}
         - id: gemini-3.7-flash-high
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: LMMLMM_API_KEY
     baibei:
       displayName: 百倍佬
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: BAIBEI_API_KEY
       api: anthropic-messages
       baseURL: https://sub.100xlabs.space
       models:
@@ -1299,17 +1299,17 @@ llm-pi-ai:
         - id: DeepSeek-V4-Flash-0731
         - id: claude-fable-5
         - id: gpt-5.6-sol
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: SEEKAI_API_KEY
     dawwadawdwad:
       displayName: 国模0.01x
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: DAWWADAWDWAD_API_KEY
       api: anthropic-messages
       baseURL: https://api.060913.xyz
       models:
         - id: deepseek-ai/deepseek-v4-flash-0731
     agentrouter:
       displayName: agentrouter
-      apiKeyEnv: <FILL-IN>
+      apiKeyEnv: AGENTROUTER_API_KEY
       api: openai-responses
       baseURL: https://agentrouter.org/v1
       models:

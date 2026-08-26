@@ -179,27 +179,102 @@ Write-Host "[8/9] 检查并校准 settings.yaml 配置文件..." -ForegroundColo
 $settingsDest = Join-Path $DshRoot "settings.yaml"
 $tmpl = Join-Path $RepoRoot "settings.yaml.template"
 
-# 自动自愈：如果本地已有的 settings.yaml 包含导致 YAML 语法崩溃的孤立 <FILL-IN>，自动替换为最新修复版模板
-$needsFix = $false
-if (Test-Path $settingsDest) {
-    $existingContent = Get-Content -LiteralPath $settingsDest -Raw -Encoding UTF8
-    if ($existingContent -match "fastaitoken:\s*\r?\n\s*<FILL-IN>") {
-        $needsFix = $true
-        Write-Host "    [自动修复] 检测到旧版损坏的 settings.yaml，正在应用修复补丁..." -ForegroundColor Yellow
+$validator = Join-Path $RepoRoot "validate-settings.mjs"
+
+# 通用 YAML 校验：不再匹配某个具体 provider 名，而是真的解析一遍
+function Test-SettingsYaml {
+    param([Parameter(Mandatory = $true)][string]$Path)
+    if (-not (Test-Path -LiteralPath $Path)) { return $false }
+    if (-not (Test-Path -LiteralPath $validator)) {
+        # 没有校验器时退化为最小文本检查：孤立占位符一定是坏的
+        $raw = Get-Content -LiteralPath $Path -Raw -Encoding UTF8
+        return -not ($raw -match "(?m)^\s*<FILL-IN>\s*$")
+    }
+    # $ErrorActionPreference=Stop 下原生命令写 stderr 可能抛异常，这里单独兜住
+    $prevEap = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        $global:LASTEXITCODE = 0
+        & node $validator $Path 2>&1 | ForEach-Object { Write-Host "      $_" -ForegroundColor DarkGray }
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        Write-Host "      [校验器无法运行] $_" -ForegroundColor DarkGray
+        return $false
+    } finally {
+        $ErrorActionPreference = $prevEap
     }
 }
 
-if (-not (Test-Path $settingsDest) -or $needsFix) {
-    if (Test-Path $tmpl) {
-        Copy-Item -Force $tmpl $settingsDest
-        Write-Host "    OK settings.yaml 已注入并校准完毕" -ForegroundColor Green
+# 先确认要分发的模板自身是合法的，避免把坏模板推给队友
+$tmplOk = $false
+if (Test-Path $tmpl) {
+    $tmplOk = Test-SettingsYaml -Path $tmpl
+    if (-not $tmplOk) {
+        Write-Host "    [错误] settings.yaml.template 自身语法不合法，已跳过注入（请在源机重新生成模板）" -ForegroundColor Red
     }
-} else {
+}
+
+if (-not (Test-Path $settingsDest)) {
+    if ($tmplOk) {
+        Copy-Item -Force $tmpl $settingsDest
+        Write-Host "    OK settings.yaml 已注入（请填写各 provider 的 <FILL-IN> 凭据）" -ForegroundColor Green
+    }
+} elseif (Test-SettingsYaml -Path $settingsDest) {
     Write-Host "    -- settings.yaml 已存在且语法健康，保留本机配置" -ForegroundColor Green
+} else {
+    # 本机配置损坏。优先「就地修复」：只补回被脱敏吞掉的字段，
+    # 你已经填好的 apiKey 一个都不动。修不好才退回覆盖模板。
+    Write-Host "    检测到 settings.yaml 语法损坏，正在尝试就地修复（保留已填密钥）..." -ForegroundColor Yellow
+    $repairer = Join-Path $RepoRoot "repair-settings.mjs"
+    $repaired = $false
+    if (Test-Path -LiteralPath $repairer) {
+        $prevEap2 = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        try {
+            $global:LASTEXITCODE = 0
+            & node $repairer $settingsDest 2>&1 | ForEach-Object { Write-Host "      $_" -ForegroundColor DarkGray }
+            $repaired = ($LASTEXITCODE -eq 0)
+        } catch {
+            Write-Host "      [修复器无法运行] $_" -ForegroundColor DarkGray
+            $repaired = $false
+        } finally {
+            $ErrorActionPreference = $prevEap2
+        }
+    }
+
+    if ($repaired -and (Test-SettingsYaml -Path $settingsDest)) {
+        Write-Host "    OK settings.yaml 已就地修复，已填写的密钥全部保留" -ForegroundColor Green
+    } elseif ($tmplOk) {
+        # 修不好：原样备份（里面可能有已填好的真实密钥），再落干净模板
+        $broken = "$settingsDest.broken-$(Get-Date -Format yyyyMMdd-HHmmss)"
+        Copy-Item -LiteralPath $settingsDest -Destination $broken -Force
+        Copy-Item -Force $tmpl $settingsDest
+        Write-Host "    [已重置] 无法就地修复，原配置已备份为 $broken" -ForegroundColor Yellow
+        Write-Host "    OK settings.yaml 已重置为干净模板，请从备份里取回你已填写的密钥" -ForegroundColor Green
+    } else {
+        Write-Host "    [错误] settings.yaml 语法损坏且无可用模板，DSH 将无法启动" -ForegroundColor Red
+    }
 }
 
 # ---------- 9. pnpm install ----------
 Write-Host "[9/9] 安装本地离线依赖（pnpm install）..." -ForegroundColor Yellow
+
+# dsh-cad 曾用 link: 分发，会在 node_modules 留下指向源码目录的符号链接／junction。
+# 源码目录没有 lib/（被它自己的 .gitignore 排除），旧链接残留会让 DSH 继续报
+# ERR_MODULE_NOT_FOUND。现在改用 .tgz，安装前先清掉旧链接，让 pnpm 重新解包。
+$staleCad = Join-Path $ProfDest "node_modules\dsh-cad"
+if (Test-Path -LiteralPath $staleCad) {
+    $item = Get-Item -LiteralPath $staleCad -Force
+    if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+        try {
+            $item.Delete()
+            Write-Host "    已清理旧的 dsh-cad 链接（改用离线 .tgz）" -ForegroundColor DarkGray
+        } catch {
+            Write-Host "    [提示] 旧 dsh-cad 链接清理失败，pnpm 可能自行覆盖：$_" -ForegroundColor DarkGray
+        }
+    }
+}
+
 Push-Location $ProfDest
 $installOk = $true
 try {
