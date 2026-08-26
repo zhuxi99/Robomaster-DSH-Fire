@@ -157,11 +157,11 @@ foreach ($p in $pluginList) {
     }
 }
 
-# ---------- 3. 第三方 CAD 插件 ----------
-Write-Host "[4/9] 复制第三方 CAD 插件 -> .dsh\pack\third-party\" -ForegroundColor Yellow
+# ---------- 3. 第三方插件（CAD + 离线打包 tgz） ----------
+Write-Host "[4/9] 复制第三方插件（CAD 2 个 + 离线打包 11 个）-> .dsh\pack\third-party\" -ForegroundColor Yellow
 New-Item -ItemType Directory -Force -Path $PackDest | Out-Null
 Copy-DirectoryContents -Source (Join-Path $RepoRoot "third-party") -Destination $PackDest
-Write-Host "    OK dsh-cad / dsh-cad-review"
+Write-Host "    OK dsh-cad / dsh-cad-review + 11 个离线 tgz 插件"
 
 # ---------- 4. desktop profile 配置 ----------
 Write-Host "[5/9] 复制 desktop profile 配置" -ForegroundColor Yellow
@@ -244,7 +244,7 @@ if ($installOk) {
 Write-Host " 下一步：" -ForegroundColor Cyan
 Write-Host "  1. 完整重启 DSH Desktop（不是刷新页面）" -ForegroundColor White
 Write-Host "  2. 若浏览器工具报缺内核：调用 browser_install" -ForegroundColor White
-Write-Host "  3. 验证插件：设置 - 插件，应能看到 CAD 插件" -ForegroundColor White
+Write-Host "  3. 验证插件：设置 - 插件，应能看到 CAD 与全部离线插件" -ForegroundColor White
 Write-Host "==============================================" -ForegroundColor Cyan
 
 if (-not $installOk) {
