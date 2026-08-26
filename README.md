@@ -1,20 +1,10 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/%E5%A4%AA%E5%8E%9F%E5%B7%A5%E4%B8%9A%E5%AD%A6%E9%99%A2%C2%B7%E7%81%AB%E7%BA%BF%E6%88%98%E9%98%9F-TIIT_Fireline-FF6B00?style=for-the-badge&logo=fire&logoColor=white" alt="太原工业学院·火线战队" />
-</p>
-
 # 🔥 太原工业学院 · 火线战队 DSH Desktop 整合包
 
 > **⚡ 火线战队专属** —— 由**太原工业学院火线战队**（RoboMaster）研发组打造，专为战队机械组定制的 **DeepSeek Harness Desktop (Windows) 一键安装配置套件**，开箱即用，与负责人标准开发环境完全一致。**全部插件离线打包，零 GitHub 依赖**——即使原插件仓库已下架，安装依旧稳定可用。
 
-<p align="center">
-[![Team](https://img.shields.io/badge/Team-%E5%A4%AA%E5%8E%9F%E5%B7%A5%E4%B8%9A%E5%AD%A6%E9%99%A2%C2%B7%E7%81%AB%E7%BA%BF%E6%88%98%E9%98%9F-FF6B00?logo=fire&logoColor=white)](#-项目简介)
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](#-快速开始)
-[![Node Version](https://img.shields.io/badge/Node.js-≥22-339933?logo=nodedotjs&logoColor=white)](#-快速开始)
-[![pnpm Version](https://img.shields.io/badge/pnpm-≥10-F69220?logo=pnpm&logoColor=white)](#-快速开始)
-[![DSH Desktop](https://img.shields.io/badge/DSH-Desktop-8A2BE2)](#-特性一览)
-[![Offline](https://img.shields.io/badge/Plugins-Offline_Packed-green)](#-特性一览)
-[![Security](https://img.shields.io/badge/Security-No_Secrets-brightgreen)](#-数据安全声明)
-</p>
+> | 平台 | Node.js | pnpm | DSH Desktop | 插件 | 安全 |
+> | :---: | :---: | :---: | :---: | :---: | :---: |
+> | Windows 10/11 x64 | ≥ 22 | ≥ 10 | v2.0.0 | 17 个全离线 | 零密钥泄露 |
 
 ---
 
