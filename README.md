@@ -78,7 +78,7 @@
 | **dsh-live-reload** | `0.2.0` | 插件/前端热重载 |
 | **dsh-memory-evolve** | `0.1.0` | 分层记忆 + 自我进化 + 技能/待办管理 |
 | **dsh-model-search** | `0.1.0` | 模型快速搜索 |
-| **dsh-prompt-manager** | `0.1.0` | 提示词管理与发布 |
+| **dsh-prompt-manager** | `0.1.0` | 提示词管理与发布（本整合包补丁：预设 JSON 导入导出，队内互传） |
 | **dsh-shortcuts** | `1.1.0` | 快捷键绑定 |
 | **dsh-web-default-session** | `1.0.0` | 默认工作目录会话 ⚠️ **原仓库已下架，此 tgz 为唯一可用来源** |
 | **dsh-webui-perf** | `0.1.0` | WebUI 性能优化 |
@@ -197,7 +197,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 | **dsh-web-default-session** | `1.0.0` | 新建会话 | 默认进入工作目录，无需手动选文件夹 |
 | **graph-memory** | `1.6.0-beta.1` | 会话内记忆/图谱功能 | 记忆节点可读写，SQLite 正常初始化 |
 | **dsh-auto-collapse** | `0.1.3` | 触发工具卡片 / Think 块 | 自动折叠为一行，带运行中状态 |
-| **dsh-prompt-manager** | `0.1.0` | 打开提示词管理 | 可查看/发布提示词资产 |
+| **dsh-prompt-manager** | `0.1.0` | 打开提示词管理 | 可查看/发布提示词资产；「预设方案」区有「导出全部 JSON / 导入 JSON」 |
 
 > 💡 也可到 **设置 → 插件** 页面查看全部已加载插件，确认无报错项。
 
